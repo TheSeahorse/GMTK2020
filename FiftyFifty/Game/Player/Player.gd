@@ -7,6 +7,7 @@ enum Direction {
 
 
 var GRAVITY = 1500
+var MAX_GRAVITY = 600
 var JUMP_SPEED = -600
 var DASH_SPEED = 100
 var MOVE_SPEED = 400
@@ -14,7 +15,12 @@ var velocity = Vector2.ZERO
 var direction = Direction.RIGHT
 
 func _physics_process(delta):
-	velocity.y += GRAVITY * delta
+	if not(is_on_floor()):
+		velocity.y += GRAVITY * delta
+	if is_on_floor() and velocity.y > 0:
+		velocity.y = 0
+	if velocity.y > MAX_GRAVITY:
+		velocity.y = MAX_GRAVITY
 	move_and_slide(velocity, Vector2.UP)
 	print(direction)
 
@@ -31,11 +37,11 @@ func move(move_direction):
 	if move_direction == Direction.LEFT:
 		velocity.x = -MOVE_SPEED
 		direction = Direction.LEFT
-		$Eye.rect_position.x = 5
+		$Sprite.flip_h = true
 	if move_direction == Direction.RIGHT:
 		direction = Direction.RIGHT
 		velocity.x = MOVE_SPEED
-		$Eye.rect_position.x = 25
+		$Sprite.flip_h = false
 
 func stop():
 	velocity.x = 0
