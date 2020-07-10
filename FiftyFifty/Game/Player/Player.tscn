@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 32 )
+
+[node name="Player" type="KinematicBody2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 32.0
+margin_bottom = 32.0
+color = Color( 0.192157, 0.0705882, 0.0705882, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+margin_top = -32.0
+margin_right = 32.0
+color = Color( 0.294118, 0.113725, 0.113725, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 16, 0 )
+shape = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 320, -160 )
+current = true
