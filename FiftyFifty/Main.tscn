@@ -10,10 +10,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer" type="Button" parent="."]
+[node name="StartGameButton" type="Button" parent="."]
 margin_left = 594.0
 margin_top = 350.0
 margin_right = 686.0
 margin_bottom = 370.0
 text = "START GAME"
-[connection signal="pressed" from="CenterContainer" to="." method="_on_CenterContainer_pressed"]
+[connection signal="pressed" from="StartGameButton" to="." method="_on_StartGameButton_pressed"]

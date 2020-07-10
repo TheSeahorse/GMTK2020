@@ -1,4 +1,5 @@
 extends CenterContainer
 
-func _on_CenterContainer_pressed() -> void:
+
+func _on_StartGameButton_pressed():
 	get_tree().change_scene("res://Game/Game.tscn")
