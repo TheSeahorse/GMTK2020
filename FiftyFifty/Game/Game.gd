@@ -10,10 +10,15 @@ var player_jumps = 0
 var health = 100
 var lazer
 
+var gun_energy = 100
+var gun_shoot_start_time = OS.get_ticks_msec()
+
 func _ready() -> void:
 	set_process_input(true)
+	set_process(true)
 	randomize()
 	$HUD/HealthBar.value = 100
+	$HUD/GunBar.value = 100
 	player = Player.instance()
 	var level = Level.instance()
 	add_child(player)
@@ -22,6 +27,14 @@ func _ready() -> void:
 	player.connect("take_damage", self, "change_health")
 	add_child(level)
 	level.start_level("One")
+
+func _process(_delta):
+	$HUD/GunBar.value = gun_energy
+	if gun_energy <= 100:
+		var energy_since_shot = (OS.get_ticks_msec() - gun_shoot_start_time) / 400
+		gun_energy += energy_since_shot
+	if gun_energy > 100:
+		gun_energy = 100
 
 func _physics_process(delta):
 	if player.is_on_floor() and player.velocity.y > 0:
@@ -56,6 +69,13 @@ func change_health(value: int):
 func shoot():
 	if player.is_knocked_back:
 		return
+
+	if gun_energy >= 50:
+		gun_energy -= 50
+	else:
+		return
+	gun_shoot_start_time = OS.get_ticks_msec()
+
 	if randi() % 2 == 0:
 		$teleport_sound_start.play()
 		var teleport = Teleport.instance()
