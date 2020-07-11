@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Game/World/city_backgrounds/city_background_night.png" type="Texture" id=1]
+
+[node name="Sunset_background" type="ParallaxBackground"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.5, 0.3 )
+motion_mirroring = Vector2( 8192, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer"]
+position = Vector2( 4095, -64 )
+texture = ExtResource( 1 )
