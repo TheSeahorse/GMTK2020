@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Game/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Game/Player/Primitive_robot.png" type="Texture" id=2]
 [ext_resource path="res://Game/Player/Primitive_robot_fade.png" type="Texture" id=3]
+[ext_resource path="res://Game/Player/dash_sound.wav" type="AudioStream" id=4]
+[ext_resource path="res://Game/Player/hurt_sound.wav" type="AudioStream" id=5]
+[ext_resource path="res://Game/Player/jump_sound.wav" type="AudioStream" id=6]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -51,4 +54,16 @@ collision_mask = 6
 modulate = Color( 0, 0.882353, 0, 1 )
 position = Vector2( 16, 32 )
 shape = SubResource( 3 )
+
+[node name="jump_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -15.146
+
+[node name="dash_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -11.107
+
+[node name="hurt_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -15.146
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]

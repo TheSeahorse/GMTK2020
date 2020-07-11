@@ -63,6 +63,7 @@ func jump():
 	if is_knocked_back:
 		#cant jump while hurting
 		return
+	$jump_sound.play()
 	velocity.y = JUMP_SPEED
 
 func dash():
@@ -70,6 +71,7 @@ func dash():
 		#cant dash while hurting
 		return
 	is_dashing = true
+	$dash_sound.play()
 	if direction == Direction.RIGHT:
 		dash_velocity.x = DASH_SPEED
 	else:
@@ -105,6 +107,7 @@ func hook():
 
 
 func hurt():
+	$hurt_sound.play()
 	hurt_start = OS.get_ticks_msec()
 	is_knocked_back = true
 	is_hurting = true
