@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Game/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Game/Player/Primitive_robot.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 32 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 18, 34 )
 
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 14
@@ -21,3 +24,11 @@ centered = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 16, 32 )
 shape = SubResource( 1 )
+
+[node name="Hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+modulate = Color( 0, 0.882353, 0, 1 )
+position = Vector2( 16, 32 )
+shape = SubResource( 2 )
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]

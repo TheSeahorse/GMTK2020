@@ -12,23 +12,26 @@ func _ready() -> void:
 	var level = Level.instance()
 	add_child(player)
 	player.position.y = 540
+	player.connect("level_cleared", self, "level_cleared")
 	add_child(level)
 	level.start_level("One")
-	
+
 func _input(event):
 	if event.is_action_pressed("jump_dash") and player.is_on_floor():
 		if randi() % 2 == 0:
 			player.jump()
 		else:
 			player.dash()
-		
+
 	if event.is_action_pressed("move_left"):
 		player.move(player.Direction.LEFT)
 	if event.is_action_pressed("move_right"):
 		player.move(player.Direction.RIGHT)
-	
+
 	if event.is_action_released("move_right") and player.velocity.x > 0:
 		player.stop()
 	if event.is_action_released("move_left") and player.velocity.x < 0:
 		player.stop()
 
+func level_cleared():
+	get_tree().change_scene("res://Game/Level/Levels/Finish.tscn")

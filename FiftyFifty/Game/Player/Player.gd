@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal level_cleared
+
 enum Direction {
 	RIGHT,
 	LEFT,
@@ -25,7 +27,7 @@ func _physics_process(delta):
 
 func jump():
 	velocity.y = JUMP_SPEED
-	
+
 func dash():
 	if direction == Direction.RIGHT:
 		position.x += DASH_SPEED
@@ -44,3 +46,8 @@ func move(move_direction):
 
 func stop():
 	velocity.x = 0
+
+
+func _on_Hurtbox_area_entered(area: Area2D) -> void:
+	if area is Portal:
+		emit_signal("level_cleared")

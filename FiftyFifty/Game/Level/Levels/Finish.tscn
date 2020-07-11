@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Game/Level/Levels/Finish.gd" type="Script" id=1]
+
+[node name="Finish" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CenterContainer"]
+margin_left = 554.0
+margin_top = 276.0
+margin_right = 725.0
+margin_bottom = 443.0
+text = "Congratulations, you did it!
+Made by 
+Alexander Lahti
+Mikael Mollberg
+
+
+
+
+
+"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="CenterContainer"]
+margin_left = 599.0
+margin_top = 350.0
+margin_right = 680.0
+margin_bottom = 370.0
+text = "Play again?"
+[connection signal="pressed" from="CenterContainer/Button" to="." method="_on_Button_pressed"]
