@@ -2,6 +2,7 @@ extends Node2D
 
 onready var Player = preload("res://Game/Player/Player.tscn")
 onready var Lazer = preload("res://Game/Player/Lazer.tscn")
+onready var Teleport = preload("res://Game/Player/Teleport.tscn")
 onready var Level = preload("res://Game/Level/Level.tscn")
 
 var player
@@ -51,16 +52,47 @@ func change_health(value: int):
 		player_died()
 
 func shoot():
-	lazer = Lazer.instance()
-	add_child(lazer)
-	lazer.init(player.direction)
-	var lazer_position_diff
-	if player.direction == player.Direction.RIGHT:
-		lazer_position_diff = Vector2(32, 32)
+	if randi() % 2 == 0:
+		var teleport = Teleport.instance()
+		var position_diff
+		if player.direction == player.Direction.RIGHT:
+			position_diff = Vector2(32, 32)
+		else:
+			position_diff = Vector2(-16, 32)
+		teleport.position = player.position + position_diff
+		add_child(teleport)
+		teleport.init(player.direction)
+		teleport.connect("hit", self, "on_Teleport_hit")
 	else:
-		lazer_position_diff = Vector2(-16, 32)
-	lazer.position = player.position + lazer_position_diff
-	lazer.connect("hit", self, "on_Lazer_hit")
+		lazer = Lazer.instance()
+		add_child(lazer)
+		lazer.init(player.direction)
+		var position_diff
+		if player.direction == player.Direction.RIGHT:
+			position_diff = Vector2(32, 32)
+		else:
+			position_diff = Vector2(-16, 32)
+		lazer.position = player.position + position_diff
+		lazer.connect("hit", self, "on_Lazer_hit")
+
+func on_Teleport_hit(teleport, body):
+	var test_move = true
+	var x = 0
+	var y = 0
+	var y_inc = -1
+	var transform = teleport.get_transform()
+	transform.origin = transform.origin + Vector2(-10, -32)
+	while test_move:
+		test_move = player.test_move(transform, Vector2(x, y))
+		x -= 1
+		if x <= -32:
+			y += y_inc
+			x = 0
+		if y <= -32:
+			y_inc = 1
+		if y >= 32:
+			break
+	player.position = transform.origin + Vector2(x, y)
 
 func on_Lazer_hit(lazer, body):
 	if body is Enemy:
