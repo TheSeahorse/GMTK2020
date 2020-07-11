@@ -1,11 +1,13 @@
 extends Node2D
 
 onready var Player = preload("res://Game/Player/Player.tscn")
+onready var Lazer = preload("res://Game/Player/Lazer.tscn")
 onready var Level = preload("res://Game/Level/Level.tscn")
 
 var player
 var player_jumps = 0
 var health = 100
+var lazer
 
 func _ready() -> void:
 	set_process_input(true)
@@ -38,6 +40,9 @@ func _input(event):
 				player.dash()
 			player_jumps -= 1
 
+	if event.is_action_pressed("hook_shoot"):
+		shoot()
+
 func change_health(value: int):
 	health += value
 	if health > 100:
@@ -45,6 +50,22 @@ func change_health(value: int):
 	elif health < 1:
 		player_died()
 
+func shoot():
+	lazer = Lazer.instance()
+	add_child(lazer)
+	lazer.init(player.direction)
+	var lazer_position_diff
+	if player.direction == player.Direction.RIGHT:
+		lazer_position_diff = Vector2(32, 32)
+	else:
+		lazer_position_diff = Vector2(-16, 32)
+	lazer.position = player.position + lazer_position_diff
+	lazer.connect("hit", self, "on_Lazer_hit")
+
+func on_Lazer_hit(lazer, body):
+	if body is Enemy:
+		body.queue_free()
+	lazer.queue_free()
 
 func player_died():
 	get_tree().change_scene("res://Main.tscn")

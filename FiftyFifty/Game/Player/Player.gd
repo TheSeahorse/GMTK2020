@@ -3,6 +3,8 @@ extends KinematicBody2D
 signal level_cleared
 signal take_damage
 
+onready var Hook = preload("res://Game/Player/Hook.tscn")
+
 enum Direction {
 	RIGHT,
 	LEFT,
@@ -23,6 +25,9 @@ var direction = Direction.RIGHT
 var dash_start = OS.get_ticks_msec()
 var dash_end = OS.get_ticks_msec()
 var is_dashing = false
+
+# Hook variables
+var hook
 
 func _physics_process(delta):
 	if not(is_on_floor()):
@@ -70,6 +75,12 @@ func move(move_direction):
 func stop():
 	move_velocity.x = 0
 
+func hook():
+	print("hook")
+	hook = Hook.instance()
+	add_child(hook)
+	hook.position.x = $Sprite.texture.get_width() / 2 + 8
+	hook.position.y = $Sprite.texture.get_height() / 2 - 16
 
 func _on_Hurtbox_area_entered(area: Area2D) -> void:
 	if area is Portal:

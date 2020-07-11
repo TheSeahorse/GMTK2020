@@ -3,14 +3,14 @@
 [ext_resource path="res://Game/Enemies/evil_henchman.png" type="Texture" id=1]
 [ext_resource path="res://Game/Enemies/Evil_henchman.gd" type="Script" id=2]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 15, 15 )
 
 [node name="Evil_henchman" type="KinematicBody2D"]
-collision_layer = 0
+collision_layer = 4
 collision_mask = 6
 script = ExtResource( 2 )
 
@@ -22,8 +22,9 @@ collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 modulate = Color( 0.145098, 0.905882, 0.137255, 1 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 1 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
+[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
