@@ -53,6 +53,7 @@ func change_health(value: int):
 
 func shoot():
 	if randi() % 2 == 0:
+		$teleport_sound_start.play()
 		var teleport = Teleport.instance()
 		var position_diff
 		if player.direction == player.Direction.RIGHT:
@@ -64,6 +65,7 @@ func shoot():
 		teleport.init(player.direction)
 		teleport.connect("hit", self, "on_Teleport_hit")
 	else:
+		$laser_sound.play()
 		lazer = Lazer.instance()
 		add_child(lazer)
 		lazer.init(player.direction)
@@ -76,6 +78,7 @@ func shoot():
 		lazer.connect("hit", self, "on_Lazer_hit")
 
 func on_Teleport_hit(teleport, body):
+	$teleport_sound_end.play()
 	var test_move = true
 	var x = 0
 	var y = 0
