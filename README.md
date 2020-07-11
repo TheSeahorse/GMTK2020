@@ -2,7 +2,8 @@
 Repo for Alexander and Mikaels GMTK2020 submission
 
 Graphics:
-Portals made by RodHakGames - RHG - https://opengameart.org/content/portals-32-x-48
+Portals made by RodHakGames - RHG - https://opengameart.org/content/portals-32-x-48  
+Background - https://opengameart.org/content/city-background-repetitive-3
 
 Sound:
 Greek - Savage Robot - https://www.youtube.com/c/FlavioConcini  
