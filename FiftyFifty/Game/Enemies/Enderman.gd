@@ -1,7 +1,7 @@
 extends KinematicBody2D
 class_name Enderman
 
-onready var Lazer = preload("res://Game/Player/Lazer.tscn")
+onready var EnemyLazer = preload("res://Game/Player/EnemyLazer.tscn")
 
 enum Direction {
 	RIGHT,
@@ -69,7 +69,7 @@ func calculate_direction():
 
 func shoot_lazer():
 	$laser_sound.play()
-	lazer = Lazer.instance()
+	lazer = EnemyLazer.instance()
 	add_child(lazer)
 	if direction == Direction.LEFT:
 		lazer.position.x = -32

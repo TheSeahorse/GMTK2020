@@ -74,9 +74,11 @@ func shoot():
 		gun_energy -= 50
 	else:
 		return
+
 	gun_shoot_start_time = OS.get_ticks_msec()
 
 	if randi() % 2 == 0:
+		player.play_prio_animation("teleport")
 		$teleport_sound_start.play()
 		var teleport = Teleport.instance()
 		var position_diff
@@ -89,6 +91,7 @@ func shoot():
 		teleport.init(player.direction)
 		teleport.connect("hit", self, "on_Teleport_hit")
 	else:
+		player.play_prio_animation("lazer")
 		$laser_sound.play()
 		lazer = Lazer.instance()
 		add_child(lazer)

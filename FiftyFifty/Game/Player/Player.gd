@@ -28,6 +28,8 @@ var direction = Direction.RIGHT
 var dash_start = OS.get_ticks_msec()
 var dash_end = OS.get_ticks_msec()
 var hurt_start
+var prio_anim = false
+var prio_anim_start = OS.get_ticks_msec()
 var is_dashing = false
 var is_knocked_back = false #knock back anim after taking damage
 var is_hurting = false #blinking hurt animation, should not take damage during this
@@ -37,7 +39,11 @@ func _process(delta: float) -> void:
 	if is_hurting:
 		if hurt_start + 1000 < OS.get_ticks_msec():
 			is_hurting = false
-			$Sprite.play("normal")
+			$Sprite.play("idle")
+	if prio_anim:
+		if prio_anim_start + 250 < OS.get_ticks_msec():
+			prio_anim = false
+			$Sprite.play("idle")
 
 func _physics_process(delta):
 	if not(is_on_floor()):
@@ -82,6 +88,8 @@ func move(move_direction):
 	if is_dashing or is_knocked_back:
 		# Don't change direction while dashing or hurting
 		return
+	if not prio_anim:
+		$Sprite.play("move")
 	if move_direction == Direction.LEFT:
 		move_velocity.x = -MOVE_SPEED
 		direction = Direction.LEFT
@@ -94,6 +102,8 @@ func move(move_direction):
 func stop():
 	if is_knocked_back:
 		return
+	if not prio_anim:
+		$Sprite.play("idle")
 	move_velocity.x = 0
 
 
@@ -110,6 +120,11 @@ func hurt():
 	else:
 		move_velocity.x = HURT_SPEED.x
 
+
+func play_prio_animation(name: String):
+	$Sprite.play(name)
+	prio_anim = true
+	prio_anim_start = OS.get_ticks_msec()
 
 func _on_Hurtbox_area_entered(area: Area2D) -> void:
 	if area is Portal:
