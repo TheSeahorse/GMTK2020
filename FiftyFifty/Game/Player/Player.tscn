@@ -214,7 +214,7 @@ animations = [ {
 "speed": 16.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=18]
+[sub_resource type="RectangleShape2D" id=38]
 extents = Vector2( 16, 28 )
 
 [sub_resource type="RectangleShape2D" id=39]
