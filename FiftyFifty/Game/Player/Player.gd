@@ -97,7 +97,7 @@ func stop():
 func hook():
 	if is_knocked_back:
 		return
-	print("hook")
+
 	hook = Hook.instance()
 	add_child(hook)
 	hook.position.x = $Sprite.texture.get_width() / 2 + 8
