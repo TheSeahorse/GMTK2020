@@ -13,6 +13,7 @@ var lazer
 func _ready() -> void:
 	set_process_input(true)
 	randomize()
+	$HUD/HealthBar.value = 100
 	player = Player.instance()
 	var level = Level.instance()
 	add_child(player)
@@ -46,6 +47,7 @@ func _input(event):
 
 func change_health(value: int):
 	health += value
+	$HUD/HealthBar.value = health
 	if health > 100:
 		health = 100
 	elif health < 1:

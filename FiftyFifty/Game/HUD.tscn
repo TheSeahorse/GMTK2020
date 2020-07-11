@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Game/HealthBar.png" type="Texture" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.811765, 0.0784314, 0.0784314, 1 )
+border_color = Color( 0.188235, 0.188235, 0.188235, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 0, 0, 0.392157 )
+border_color = Color( 0.188235, 0.188235, 0.188235, 1 )
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+margin_left = 34.0
+margin_top = 8.0
+margin_right = 180.0
+margin_bottom = 28.0
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+value = 50.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 8, 8 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+centered = false
