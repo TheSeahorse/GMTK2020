@@ -5,6 +5,7 @@ onready var Level = preload("res://Game/Level/Level.tscn")
 
 var player
 var player_jumps = 0
+var health = 100
 
 func _ready() -> void:
 	set_process_input(true)
@@ -14,6 +15,7 @@ func _ready() -> void:
 	add_child(player)
 	player.position.y = 540
 	player.connect("level_cleared", self, "level_cleared")
+	player.connect("take_damage", self, "change_health")
 	add_child(level)
 	level.start_level("One")
 
@@ -36,6 +38,17 @@ func _input(event):
 			else:
 				player.dash()
 			player_jumps -= 1
+
+func change_health(value: int):
+	health += value
+	if health > 100:
+		health = 100
+	elif health < 1:
+		player_died()
+
+
+func player_died():
+	get_tree().change_scene("res://Main.tscn")
 
 func level_cleared():
 	get_tree().change_scene("res://Game/Level/Levels/Finish.tscn")

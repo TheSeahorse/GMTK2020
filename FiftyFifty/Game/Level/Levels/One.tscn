@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Game/World/Portal.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Game/Enemies/Evil_henchman.tscn" type="PackedScene" id=3]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -42,3 +43,6 @@ tile_data = PoolIntArray( 524281, 0, 0, 589817, 0, 0, 655353, 0, 0, 589901, 0, 0
 [node name="Portal" parent="." instance=ExtResource( 2 )]
 position = Vector2( 4215, 407 )
 scale = Vector2( 2.29715, 2.29715 )
+
+[node name="Evil_henchman" parent="." instance=ExtResource( 3 )]
+position = Vector2( 545, 592 )
