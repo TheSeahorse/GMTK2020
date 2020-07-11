@@ -109,6 +109,8 @@ func stop():
 
 func hurt():
 	emit_signal("take_damage", -25)
+	prio_anim = true
+	prio_anim_start = OS.get_ticks_msec() + 750
 	$Sprite.play("hurt")
 	$hurt_sound.play()
 	hurt_start = OS.get_ticks_msec()
