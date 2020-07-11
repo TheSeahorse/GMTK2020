@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+class_name Player
+
 signal level_cleared
 signal take_damage
 
@@ -30,8 +32,6 @@ var is_dashing = false
 var is_knocked_back = false #knock back anim after taking damage
 var is_hurting = false #blinking hurt animation, should not take damage during this
 
-# Hook variables
-var hook
 
 func _process(delta: float) -> void:
 	if is_hurting:
@@ -96,17 +96,10 @@ func stop():
 		return
 	move_velocity.x = 0
 
-func hook():
-	if is_knocked_back:
-		return
-
-	hook = Hook.instance()
-	add_child(hook)
-	hook.position.x = $Sprite.texture.get_width() / 2 + 8
-	hook.position.y = $Sprite.texture.get_height() / 2 - 16
-
 
 func hurt():
+	emit_signal("take_damage", -25)
+	$Sprite.play("hurt")
 	$hurt_sound.play()
 	hurt_start = OS.get_ticks_msec()
 	is_knocked_back = true
@@ -123,6 +116,4 @@ func _on_Hurtbox_area_entered(area: Area2D) -> void:
 		emit_signal("level_cleared")
 	else:
 		if not is_hurting:
-			emit_signal("take_damage", -25)
-			$Sprite.play("hurt")
 			hurt()

@@ -54,6 +54,8 @@ func change_health(value: int):
 		player_died()
 
 func shoot():
+	if player.is_knocked_back:
+		return
 	if randi() % 2 == 0:
 		$teleport_sound_start.play()
 		var teleport = Teleport.instance()
@@ -100,7 +102,7 @@ func on_Teleport_hit(teleport, body):
 	player.position = transform.origin + Vector2(x, y)
 
 func on_Lazer_hit(lazer, body):
-	if body is Enemy:
+	if body is Enemy or (body is Enderman):
 		body.queue_free()
 	lazer.queue_free()
 

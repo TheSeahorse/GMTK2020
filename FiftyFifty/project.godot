@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "KinematicBody2D",
+"class": "Enderman",
+"language": "GDScript",
+"path": "res://Game/Enemies/Enderman.gd"
+}, {
+"base": "KinematicBody2D",
 "class": "Enemy",
 "language": "GDScript",
 "path": "res://Game/Enemies/Evil_henchman.gd"
@@ -19,14 +24,21 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Player/Lazer.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Game/Player/Player.gd"
+}, {
 "base": "Area2D",
 "class": "Portal",
 "language": "GDScript",
 "path": "res://Game/World/Portal.gd"
 } ]
 _global_script_class_icons={
+"Enderman": "",
 "Enemy": "",
 "Lazer": "",
+"Player": "",
 "Portal": ""
 }
 
