@@ -22,7 +22,6 @@ func _physics_process(delta):
 	if velocity.y > MAX_GRAVITY:
 		velocity.y = MAX_GRAVITY
 	move_and_slide(velocity, Vector2.UP)
-	print(direction)
 
 func jump():
 	velocity.y = JUMP_SPEED
