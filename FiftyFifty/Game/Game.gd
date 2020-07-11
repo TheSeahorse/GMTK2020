@@ -6,9 +6,12 @@ onready var Teleport = preload("res://Game/Player/Teleport.tscn")
 onready var Level = preload("res://Game/Level/Level.tscn")
 
 var player
+var level
 var player_jumps = 0
 var health = 100
 var lazer
+var levels = ["One", "Two"]
+var current_level
 
 var gun_energy = 100
 var gun_shoot_start_time = OS.get_ticks_msec()
@@ -17,16 +20,7 @@ func _ready() -> void:
 	set_process_input(true)
 	set_process(true)
 	randomize()
-	$HUD/HealthBar.value = 100
-	$HUD/GunBar.value = 100
-	player = Player.instance()
-	var level = Level.instance()
-	add_child(player)
-	player.position.y = 540
-	player.connect("level_cleared", self, "level_cleared")
-	player.connect("take_damage", self, "change_health")
-	add_child(level)
-	level.start_level("One")
+	start_level("One")
 
 func _process(_delta):
 	$HUD/GunBar.value = gun_energy
@@ -57,6 +51,20 @@ func _input(event):
 
 	if event.is_action_pressed("hook_shoot"):
 		shoot()
+
+func start_level(level_name: String):
+	current_level = level_name
+	health = 100
+	$HUD/HealthBar.value = 100
+	$HUD/GunBar.value = 100
+	player = Player.instance()
+	level = Level.instance()
+	add_child(player)
+	player.position.y = 540
+	player.connect("level_cleared", self, "level_cleared")
+	player.connect("take_damage", self, "change_health")
+	add_child(level)
+	level.start_level(level_name)
 
 func change_health(value: int):
 	health += value
@@ -130,7 +138,21 @@ func on_Lazer_hit(lazer, body):
 	lazer.queue_free()
 
 func player_died():
-	get_tree().change_scene("res://Main.tscn")
+	level.queue_free()
+	player.queue_free()
+	start_level(current_level)
 
 func level_cleared():
-	get_tree().change_scene("res://Game/Level/Levels/Finish.tscn")
+	player.queue_free()
+	var new_level
+	var level_index = levels.find(level.level_name)
+	if level_index >= 0:
+		if level_index + 1 < levels.size():
+			print(level_index + 1)
+			print(levels.size())
+			print("level_index + 1 < levels.size()")
+			new_level = levels[level_index + 1]
+			level.queue_free()
+			start_level(new_level)
+		else:
+			get_tree().change_scene("res://Game/Level/Levels/Finish.tscn")
