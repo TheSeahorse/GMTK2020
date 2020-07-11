@@ -31,7 +31,6 @@ func _physics_process(delta):
 
 func _input(event):
 	if event.is_action_pressed("jump_dash"):
-		print(player_jumps)
 		if player_jumps > 0:
 			if randi() % 2 == 0:
 				player.jump()
