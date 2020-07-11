@@ -10,7 +10,7 @@ extents = Vector2( 16, 16 )
 extents = Vector2( 15, 15 )
 
 [node name="Evil_henchman" type="KinematicBody2D"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 6
 script = ExtResource( 2 )
 

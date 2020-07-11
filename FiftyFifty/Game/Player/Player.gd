@@ -75,4 +75,4 @@ func _on_Hurtbox_area_entered(area: Area2D) -> void:
 	if area is Portal:
 		emit_signal("level_cleared")
 	else:
-		emit_signal("take_damage", -100)
+		emit_signal("take_damage", -50)

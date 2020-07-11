@@ -44,5 +44,24 @@ tile_data = PoolIntArray( 524281, 0, 0, 589817, 0, 0, 655353, 0, 0, 589901, 0, 0
 position = Vector2( 4215, 407 )
 scale = Vector2( 2.29715, 2.29715 )
 
+[node name="Evil_henchman6" parent="." instance=ExtResource( 3 )]
+position = Vector2( 3727, 688 )
+
+[node name="Evil_henchman5" parent="." instance=ExtResource( 3 )]
+position = Vector2( 2935, 784 )
+
 [node name="Evil_henchman" parent="." instance=ExtResource( 3 )]
 position = Vector2( 545, 592 )
+
+[node name="Evil_henchman2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1176, 656 )
+
+[node name="Evil_henchman3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1874, 656 )
+
+[node name="Evil_henchman4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 2427, 464 )
+
+[node name="Evil_henchman7" parent="." instance=ExtResource( 3 )]
+position = Vector2( 4050, 560 )
+direction = 0
