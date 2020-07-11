@@ -10,7 +10,7 @@ enum Direction {
 # Final variables
 var GRAVITY = 1500
 var MAX_GRAVITY = 600
-var JUMP_SPEED = -600
+var JUMP_SPEED = -650
 var DASH_SPEED = 600
 var MOVE_SPEED = 400
 
