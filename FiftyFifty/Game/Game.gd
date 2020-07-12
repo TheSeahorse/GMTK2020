@@ -166,6 +166,6 @@ func level_cleared():
 		if level_index + 1 < levels.size():
 			new_level = levels[level_index + 1]
 			level.queue_free()
-			start_level(new_level)
+			call_deferred('start_level', new_level)
 		else:
 			get_tree().change_scene("res://Game/Level/Levels/Finish.tscn")
