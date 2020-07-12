@@ -5,8 +5,6 @@ class_name Player
 signal level_cleared
 signal take_damage
 
-onready var Hook = preload("res://Game/Player/Hook.tscn")
-
 enum Direction {
 	RIGHT,
 	LEFT,
@@ -35,7 +33,7 @@ var is_knocked_back = false #knock back anim after taking damage
 var is_hurting = false #blinking hurt animation, should not take damage during this
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if is_hurting:
 		if hurt_start + 1000 < OS.get_ticks_msec():
 			is_hurting = false
@@ -46,6 +44,8 @@ func _process(delta: float) -> void:
 			$Sprite.play("idle")
 
 func _physics_process(delta):
+	if is_on_ceiling():
+		velocity.y = 0
 	if not(is_on_floor()):
 		velocity.y += GRAVITY * delta
 	if is_on_floor() and velocity.y > 0:

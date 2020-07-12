@@ -13,7 +13,6 @@ var MAX_GRAVITY = 600
 var MOVE_SPEED = 50
 var JUMP_SPEED = -350
 
-var lazer
 var velocity = Vector2.ZERO
 var move_change = OS.get_ticks_msec()
 var action_timer = OS.get_ticks_msec()
@@ -69,7 +68,7 @@ func calculate_direction():
 
 func shoot_lazer():
 	$laser_sound.play()
-	lazer = EnemyLazer.instance()
+	var lazer = EnemyLazer.instance()
 	add_child(lazer)
 	if direction == Direction.LEFT:
 		lazer.position.x = -32

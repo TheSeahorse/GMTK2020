@@ -9,7 +9,6 @@ var player
 var level
 var player_jumps = 0
 var health = 100
-var lazer
 var levels = ["One", "Two"]
 var current_level
 var jump_dash # 0 if jump is next, 1 if dash is next
@@ -32,7 +31,7 @@ func _process(_delta):
 	if gun_energy > 100:
 		gun_energy = 100
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if player.is_on_floor() and player.velocity.y > 0:
 		player_jumps = 2
 	if Input.is_action_pressed("move_left"):
@@ -96,7 +95,7 @@ func shoot():
 	if lazer_teleport == 0:
 		player.play_prio_animation("lazer")
 		$laser_sound.play()
-		lazer = Lazer.instance()
+		var lazer = Lazer.instance()
 		add_child(lazer)
 		lazer.init(player.direction)
 		var position_diff
@@ -122,7 +121,7 @@ func shoot():
 	lazer_teleport = randi() % 2
 	print("next_lazer_teleport: " + str(lazer_teleport))
 
-func on_Teleport_hit(teleport, body):
+func on_Teleport_hit(teleport, _body):
 	$teleport_sound_end.play()
 	var test_move = true
 	var x = 0
@@ -158,9 +157,6 @@ func level_cleared():
 	var level_index = levels.find(level.level_name)
 	if level_index >= 0:
 		if level_index + 1 < levels.size():
-			print(level_index + 1)
-			print(levels.size())
-			print("level_index + 1 < levels.size()")
 			new_level = levels[level_index + 1]
 			level.queue_free()
 			start_level(new_level)
