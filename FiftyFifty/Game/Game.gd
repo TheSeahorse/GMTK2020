@@ -145,6 +145,8 @@ func shoot():
 	lazer_teleport = randi() % 2
 
 func on_Teleport_hit(teleport, _body):
+	if not is_instance_valid(player):
+		return
 	$teleport_sound_end.play()
 	var test_move = true
 	var x = 0

@@ -20,7 +20,11 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
+<<<<<<< HEAD
 flags/filter=false
+=======
+flags/filter=true
+>>>>>>> d73c7322d506dfa672857049d7428037781af3d8
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
