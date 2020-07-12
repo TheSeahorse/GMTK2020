@@ -182,7 +182,6 @@ func on_Lazer_hit(lazer, body):
 	lazer.queue_free()
 
 func player_died():
-	#level.queue_free()
 	$Camera2D.position = player.get_node("Camera2D").get_camera_position()
 	$Camera2D.offset = player.get_node("Camera2D").offset
 	player.get_node("Camera2D").current = false

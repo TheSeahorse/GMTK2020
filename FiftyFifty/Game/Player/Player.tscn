@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=2]
+[gd_scene load_steps=85 format=2]
 
 [ext_resource path="res://Game/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Game/Player/Robot_hurt.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Game/Player/Robot_shoot.png" type="Texture" id=9]
 [ext_resource path="res://Game/Player/Robot_portal.png" type="Texture" id=10]
 [ext_resource path="res://Game/Player/Robot_dash.png" type="Texture" id=11]
+[ext_resource path="res://Game/Player/Robot_death.png" type="Texture" id=12]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 7 )
@@ -240,7 +241,55 @@ region = Rect2( 64, 0, 32, 64 )
 atlas = ExtResource( 10 )
 region = Rect2( 96, 0, 32, 64 )
 
-[sub_resource type="SpriteFrames" id=58]
+[sub_resource type="AtlasTexture" id=58]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 0, 32, 64 )
+
+[sub_resource type="AtlasTexture" id=59]
+atlas = ExtResource( 12 )
+region = Rect2( 32, 0, 32, 64 )
+
+[sub_resource type="AtlasTexture" id=60]
+atlas = ExtResource( 12 )
+region = Rect2( 64, 0, 32, 64 )
+
+[sub_resource type="AtlasTexture" id=61]
+atlas = ExtResource( 12 )
+region = Rect2( 96, 0, 32, 64 )
+
+[sub_resource type="AtlasTexture" id=62]
+atlas = ExtResource( 12 )
+region = Rect2( 128, 0, 32, 64 )
+
+[sub_resource type="AtlasTexture" id=63]
+atlas = ExtResource( 12 )
+region = Rect2( 160, 0, 32, 64 )
+
+[sub_resource type="AtlasTexture" id=64]
+atlas = ExtResource( 12 )
+region = Rect2( 192, 0, 32, 64 )
+
+[sub_resource type="AtlasTexture" id=65]
+atlas = ExtResource( 12 )
+region = Rect2( 224, 0, 32, 64 )
+
+[sub_resource type="AtlasTexture" id=66]
+atlas = ExtResource( 12 )
+region = Rect2( 256, 0, 32, 64 )
+
+[sub_resource type="AtlasTexture" id=67]
+atlas = ExtResource( 12 )
+region = Rect2( 288, 0, 32, 64 )
+
+[sub_resource type="AtlasTexture" id=68]
+atlas = ExtResource( 12 )
+region = Rect2( 320, 0, 32, 64 )
+
+[sub_resource type="AtlasTexture" id=69]
+atlas = ExtResource( 12 )
+region = Rect2( 352, 0, 32, 64 )
+
+[sub_resource type="SpriteFrames" id=70]
 animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
 "loop": true,
@@ -276,12 +325,17 @@ animations = [ {
 "loop": false,
 "name": "teleport",
 "speed": 16.0
+}, {
+"frames": [ SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ), SubResource( 69 ) ],
+"loop": false,
+"name": "death",
+"speed": 12.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=59]
+[sub_resource type="RectangleShape2D" id=71]
 extents = Vector2( 16, 27 )
 
-[sub_resource type="RectangleShape2D" id=60]
+[sub_resource type="RectangleShape2D" id=72]
 extents = Vector2( 18, 29 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -293,15 +347,14 @@ offset = Vector2( 320, -160 )
 current = true
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 58 )
-animation = "dash"
-frame = 1
+frames = SubResource( 70 )
+animation = "death"
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2( 16, 37 )
-shape = SubResource( 59 )
+shape = SubResource( 71 )
 
 [node name="Hurtbox" type="Area2D" parent="."]
 visible = false
@@ -311,7 +364,7 @@ collision_mask = 6
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 modulate = Color( 0, 0.882353, 0, 1 )
 position = Vector2( 16, 37 )
-shape = SubResource( 60 )
+shape = SubResource( 72 )
 
 [node name="jump_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )

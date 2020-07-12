@@ -27,11 +27,11 @@ animations = [ {
 "speed": 16.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 14, 16 )
+[sub_resource type="CapsuleShape2D" id=7]
+radius = 6.0
 
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 13, 14 )
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 3, 15 )
 
 [node name="Evil_henchman" type="KinematicBody2D"]
 collision_layer = 4
@@ -47,16 +47,16 @@ physics_process_parent = true
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 5 )
 animation = "move"
-frame = 1
+frame = 2
 playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 7 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 modulate = Color( 0.145098, 0.905882, 0.137255, 1 )
-shape = SubResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 2 )
-shape = SubResource( 7 )
+position = Vector2( 0, 1 )
+shape = SubResource( 8 )
