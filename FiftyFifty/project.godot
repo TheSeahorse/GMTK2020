@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Area2D",
+"class": "Coin",
+"language": "GDScript",
+"path": "res://Game/World/Coin.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Crate",
+"language": "GDScript",
+"path": "res://Game/World/Crate.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Enderman",
 "language": "GDScript",
@@ -40,6 +50,8 @@ _global_script_classes=[ {
 "path": "res://Game/World/Portal.gd"
 } ]
 _global_script_class_icons={
+"Coin": "",
+"Crate": "",
 "Enderman": "",
 "Enemy": "",
 "EnemyLazer": "",

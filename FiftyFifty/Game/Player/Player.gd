@@ -143,12 +143,12 @@ func play_prio_animation(name: String, msec: int):
 	$Sprite.play(name)
 	$Sprite.frame = 0
 	prio_anim = true
-	prio_anim_end = OS.get_ticks_msec() + 250
+	prio_anim_end = OS.get_ticks_msec() + msec
 
 func _on_Hurtbox_area_entered(area: Area2D) -> void:
 	if area is Portal:
 		emit_signal("level_cleared")
-	elif area != EnemyLazer: # laser damage handled in the enemy that shoots the lazer
+	elif (area != EnemyLazer) and (area.collision_layer != 8): # laser damage handled in the enemy that shoots the lazer
 		hurt(-25)
 
 func die():
@@ -160,4 +160,3 @@ func die():
 	print("before death anim")
 	$Sprite.play("death")
 	$Sprite.frame = 0
-

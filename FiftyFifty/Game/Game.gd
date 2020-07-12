@@ -4,6 +4,7 @@ onready var Player = preload("res://Game/Player/Player.tscn")
 onready var Lazer = preload("res://Game/Player/Lazer.tscn")
 onready var Teleport = preload("res://Game/Player/Teleport.tscn")
 onready var Level = preload("res://Game/Level/Level.tscn")
+onready var Coin = preload("res://Game/World/Coin.tscn")
 
 var player
 var level
@@ -192,7 +193,23 @@ func on_Teleport_hit(teleport, _body):
 func on_Lazer_hit(lazer, body):
 	if body is Enemy or (body is Enderman):
 		body.queue_free()
+	if body is Crate:
+		call_deferred("create_coin", body.position)
+		body.destroy()
 	lazer.queue_free()
+
+func create_coin(position: Vector2):
+	var coin = Coin.instance()
+	add_child(coin)
+	coin.position.x = position.x
+	coin.position.y = position.y + 8
+	var rand = randi() % 10
+	if rand > 2:
+		coin.change_value("gold")
+	elif rand > 5:
+		coin.change_value("silver")
+	else:
+		coin.change_value("bronze")
 
 func player_died():
 	$Camera2D.position = player.get_node("Camera2D").get_camera_position()
