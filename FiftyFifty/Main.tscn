@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Game/World/Sunset_background.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Fonts/m5x7.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Game/World/savage_robot.wav" type="AudioStream" id=4]
 [ext_resource path="res://Fonts/FontTheme64.tres" type="Theme" id=5]
+[ext_resource path="res://Fonts/FontTheme32.tres" type="Theme" id=6]
+[ext_resource path="res://Fonts/FontTheme.tres" type="Theme" id=7]
 
 [node name="Main" type="CenterContainer"]
 anchor_right = 1.0
@@ -16,14 +18,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StartGameButton" type="Label" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 410.0
-margin_top = 334.0
+margin_top = 305.0
 margin_right = 870.0
-margin_bottom = 385.0
+margin_bottom = 415.0
+
+[node name="StartLabel" type="Label" parent="VBoxContainer"]
+margin_right = 460.0
+margin_bottom = 51.0
 theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 3 )
 text = "Press ENTER to START"
+
+[node name="OpenCreditsLabel" type="Label" parent="VBoxContainer"]
+margin_top = 55.0
+margin_right = 460.0
+margin_bottom = 110.0
+theme = ExtResource( 6 )
+text = "
+Press C for Credits"
+align = 1
 
 [node name="savage_robot" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
@@ -31,3 +46,52 @@ volume_db = -12.117
 autoplay = true
 
 [node name="Sunset_background" parent="." instance=ExtResource( 2 )]
+
+[node name="Credits" type="VBoxContainer" parent="."]
+margin_left = 319.0
+margin_top = 93.0
+margin_right = 961.0
+margin_bottom = 626.0
+
+[node name="CreditsTitle" type="Label" parent="Credits"]
+margin_right = 642.0
+margin_bottom = 38.0
+theme = ExtResource( 7 )
+text = "Credits"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloseLabel" type="Label" parent="Credits"]
+margin_top = 42.0
+margin_right = 642.0
+margin_bottom = 68.0
+theme = ExtResource( 6 )
+text = "(Press C to close)"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Credits" type="Label" parent="Credits"]
+margin_top = 72.0
+margin_right = 642.0
+margin_bottom = 533.0
+theme = ExtResource( 6 )
+text = "Johannes Baeckman: Robot and enemy
+https://www.linkedin.com/in/johannes-baeckman-a0164a1a8/
+
+Alucard: Game Background
+https://opengameart.org/content/city-background-repetitive-3
+https://creativecommons.org/licenses/by/3.0/
+
+adwitr: Health Bar
+https://adwitr.itch.io/pixel-health-bar-asset-pack
+
+sunburn: coins
+https://opengameart.org/content/oga-medal-bases-png
+https://creativecommons.org/licenses/by/3.0/
+
+Flavio Concini: Background music (Savage Robot)
+https://www.youtube.com/c/FlavioConcini"
