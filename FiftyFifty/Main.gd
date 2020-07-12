@@ -13,5 +13,5 @@ func _on_StartGameButton_pressed():
 
 func _input(event: InputEvent) -> void:
 	if not running:
-		if event.is_action_pressed("jump_dash") or event.is_action_pressed("ui_select"):
+		if event.is_action_pressed("enter"):
 			_on_StartGameButton_pressed()

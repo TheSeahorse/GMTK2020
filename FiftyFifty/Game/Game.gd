@@ -17,6 +17,8 @@ var lazer_teleport # 0 if lazer is next, 1 if tele is next
 var gun_energy = 100
 var gun_shoot_start_time = OS.get_ticks_msec()
 
+var death_screen_visible = false
+
 func _ready() -> void:
 	set_process_input(true)
 	set_process(true)
@@ -39,30 +41,43 @@ func _process(_delta):
 	else:
 		$HUD/lazer_teleport.color = Color8(33, 42, 255, 255)
 func _physics_process(_delta):
-	if player.is_on_floor() and player.velocity.y > 0:
-		player_jumps = 2
-	if Input.is_action_pressed("move_left"):
-		player.move(player.Direction.LEFT)
-	if Input.is_action_pressed("move_right"):
-		player.move(player.Direction.RIGHT)
-	if not(Input.is_action_pressed("move_left")) and not(Input.is_action_pressed("move_right")):
-		player.stop()
+	if player:
+		if player.is_on_floor() and player.velocity.y > 0:
+			player_jumps = 2
+		if Input.is_action_pressed("move_left"):
+			player.move(player.Direction.LEFT)
+		if Input.is_action_pressed("move_right"):
+			player.move(player.Direction.RIGHT)
+		if not(Input.is_action_pressed("move_left")) and not(Input.is_action_pressed("move_right")):
+			player.stop()
 
 func _input(event):
-	if event.is_action_pressed("jump_dash"):
-		if player_jumps > 0:
-			if jump_dash == 0:
-				player.jump()
-			else:
-				player.dash()
-			jump_dash = randi() % 2
-			print("next_jump_dash: " + str(jump_dash))
-			player_jumps -= 1
+	if player:
+		if event.is_action_pressed("jump_dash"):
+			if player_jumps > 0:
+				if jump_dash == 0:
+					player.jump()
+				else:
+					player.dash()
+				jump_dash = randi() % 2
+				print("next_jump_dash: " + str(jump_dash))
+				player_jumps -= 1
 
-	if event.is_action_pressed("hook_shoot"):
-		shoot()
+		if event.is_action_pressed("hook_shoot"):
+			shoot()
+
+	if death_screen_visible:
+		if event.is_action_pressed("enter"):
+			start_level(current_level)
+			death_screen_visible = false
+			$DeathScreen/Control.hide()
+
 
 func start_level(level_name: String):
+	if is_instance_valid(level):
+		level.queue_free()
+	if is_instance_valid(player):
+		player.queue_free()
 	current_level = level_name
 	health = 100
 	$HUD/HealthBar.value = 100
@@ -154,9 +169,14 @@ func on_Lazer_hit(lazer, body):
 	lazer.queue_free()
 
 func player_died():
-	level.queue_free()
+	#level.queue_free()
+	$Camera2D.position = player.get_node("Camera2D").get_camera_position()
+	$Camera2D.offset = player.get_node("Camera2D").offset
+	player.get_node("Camera2D").current = false
+	$Camera2D.make_current()
 	player.queue_free()
-	start_level(current_level)
+	$DeathScreen/Control.show()
+	death_screen_visible = true
 
 func level_cleared():
 	player.queue_free()
