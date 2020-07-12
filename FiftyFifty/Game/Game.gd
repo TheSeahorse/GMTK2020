@@ -12,7 +12,7 @@ var player
 var level
 var player_jumps = 0
 var health = 100
-var levels = ["One", "Two", "Three", "Four"]
+var levels = ["One", "Two", "Three", "Four", "Five", "Six"]
 var current_level
 var jump_dash # 0 if jump is next, 1 if dash is next
 var lazer_teleport # 0 if lazer is next, 1 if tele is next
