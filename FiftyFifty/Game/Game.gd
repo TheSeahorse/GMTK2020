@@ -28,6 +28,7 @@ var thrusters_activated = false
 var hud_activated = false
 
 func _ready() -> void:
+	Global.score = 0
 	set_process_input(true)
 	set_process(true)
 	randomize()
