@@ -5,8 +5,6 @@ class_name Player
 signal level_cleared
 signal take_damage
 
-onready var Hook = preload("res://Game/Player/Hook.tscn")
-
 enum Direction {
 	RIGHT,
 	LEFT,
