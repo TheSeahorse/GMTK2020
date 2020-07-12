@@ -14,7 +14,7 @@ func init(direction):
 	if direction != 0:
 		SPEED *= -1
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var collision_info = move_and_collide(SPEED)
 	if collision_info and collision_info.collider:
 		emit_signal("hit", self, collision_info.collider)

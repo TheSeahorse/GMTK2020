@@ -9,7 +9,6 @@ var player
 var level
 var player_jumps = 0
 var health = 100
-var lazer
 var levels = ["One", "Two"]
 var current_level
 
@@ -30,7 +29,7 @@ func _process(_delta):
 	if gun_energy > 100:
 		gun_energy = 100
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if player.is_on_floor() and player.velocity.y > 0:
 		player_jumps = 2
 	if Input.is_action_pressed("move_left"):
@@ -101,7 +100,7 @@ func shoot():
 	else:
 		player.play_prio_animation("lazer")
 		$laser_sound.play()
-		lazer = Lazer.instance()
+		var lazer = Lazer.instance()
 		add_child(lazer)
 		lazer.init(player.direction)
 		var position_diff
@@ -112,7 +111,7 @@ func shoot():
 		lazer.position = player.position + position_diff
 		lazer.connect("hit", self, "on_Lazer_hit")
 
-func on_Teleport_hit(teleport, body):
+func on_Teleport_hit(teleport, _body):
 	$teleport_sound_end.play()
 	var test_move = true
 	var x = 0

@@ -33,7 +33,7 @@ var is_knocked_back = false #knock back anim after taking damage
 var is_hurting = false #blinking hurt animation, should not take damage during this
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if is_hurting:
 		if hurt_start + 1000 < OS.get_ticks_msec():
 			is_hurting = false

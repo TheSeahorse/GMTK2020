@@ -10,7 +10,7 @@ func init(direction):
 		SPEED *= -1
 		$Sprite.flip_h = true
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	move_and_collide(SPEED)
 
 func _on_Area2D_body_entered(body):
