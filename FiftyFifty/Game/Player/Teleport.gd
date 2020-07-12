@@ -17,7 +17,8 @@ func init(direction):
 func _physics_process(_delta):
 	var collision_info = move_and_collide(SPEED)
 	if collision_info and collision_info.collider:
-		emit_signal("hit", self, collision_info.collider)
+		if OS.get_ticks_msec() - start_time > 60:
+			emit_signal("hit", self, collision_info.collider)
 		queue_free()
 
 	if OS.get_ticks_msec() - start_time > LIFETIME:

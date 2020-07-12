@@ -135,7 +135,7 @@ func shoot():
 		var teleport = Teleport.instance()
 		var position_diff
 		if player.direction == player.Direction.RIGHT:
-			position_diff = Vector2(32, 32)
+			position_diff = Vector2(48, 32)
 		else:
 			position_diff = Vector2(-16, 32)
 		teleport.position = player.position + position_diff
@@ -150,18 +150,28 @@ func on_Teleport_hit(teleport, _body):
 	var x = 0
 	var y = 0
 	var y_inc = -1
+	var x_inc = -1
 	var transform = teleport.get_transform()
-	transform.origin = transform.origin + Vector2(-10, -32)
+	if player.direction == player.Direction.RIGHT:
+		transform.origin = transform.origin + Vector2(-10, -32)
+	else:
+		transform.origin = transform.origin + Vector2(-10, -32)
 	while test_move:
 		test_move = player.test_move(transform, Vector2(x, y))
-		x -= 1
-		if x <= -32:
+		x += x_inc
+		if x <= -8:
+			x = 0
+			x_inc = 1
+		if x >= 8:
 			y += y_inc
 			x = 0
-		if y <= -32:
+			x_inc = -1
+		if y <= -8:
 			y_inc = 1
-		if y >= 32:
+			y = 0
+		if y >= 8:
 			break
+
 	player.position = transform.origin + Vector2(x, y)
 
 func on_Lazer_hit(lazer, body):
