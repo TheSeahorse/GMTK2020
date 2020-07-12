@@ -36,9 +36,6 @@ var dead = false
 var death_start
 
 func _process(_delta: float) -> void:
-	if dead:
-		if death_start + 1000 < OS.get_ticks_msec():
-			self.queue_free()
 	if is_hurting:
 		if hurt_start + 1000 < OS.get_ticks_msec():
 			is_hurting = false
