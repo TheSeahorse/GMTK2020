@@ -1,34 +1,62 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Game/Enemies/evil_henchman.png" type="Texture" id=1]
+[ext_resource path="res://Game/Enemies/Enemy.png" type="Texture" id=1]
 [ext_resource path="res://Game/Enemies/Evil_henchman.gd" type="Script" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 16 )
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 15, 15 )
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "move",
+"speed": 16.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 14, 16 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 13, 14 )
 
 [node name="Evil_henchman" type="KinematicBody2D"]
 collision_layer = 4
 collision_mask = 6
 script = ExtResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
+scale = Vector2( 2, 2.1 )
+process_parent = true
+physics_process_parent = true
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 5 )
+animation = "move"
+frame = 1
+playing = true
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 modulate = Color( 0.145098, 0.905882, 0.137255, 1 )
-shape = SubResource( 1 )
+shape = SubResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 1 )
-shape = SubResource( 2 )
-
-[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-scale = Vector2( 2, 2.1 )
-process_parent = true
-physics_process_parent = true
+position = Vector2( 0, 2 )
+shape = SubResource( 7 )
