@@ -160,8 +160,7 @@ func die():
 	$death_sound.play()
 	dead = true
 	death_start = OS.get_ticks_msec()
-	$CollisionShape2D.disabled = true
-	$Hurtbox/CollisionShape2D.disabled = true
-	print("before death anim")
+	$CollisionShape2D.call_deferred("disabled", true)
+	$Hurtbox/CollisionShape2D.call_deferred("disabled", true)
 	$Sprite.play("death")
 	$Sprite.frame = 0
