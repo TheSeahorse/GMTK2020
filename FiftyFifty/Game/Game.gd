@@ -148,9 +148,6 @@ func level_cleared():
 	var level_index = levels.find(level.level_name)
 	if level_index >= 0:
 		if level_index + 1 < levels.size():
-			print(level_index + 1)
-			print(levels.size())
-			print("level_index + 1 < levels.size()")
 			new_level = levels[level_index + 1]
 			level.queue_free()
 			start_level(new_level)
