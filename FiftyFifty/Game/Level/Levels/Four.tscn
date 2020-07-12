@@ -69,6 +69,7 @@ tile_data = PoolIntArray( -786434, 1, 0, -786433, 1, 0, -851968, 1, 0, -851967, 
 
 [node name="Portal" parent="." instance=ExtResource( 2 )]
 position = Vector2( 3768, 223 )
+rotation = 3.14159
 scale = Vector2( 2.29715, 2.29715 )
 
 [node name="Evil_henchman6" parent="." instance=ExtResource( 3 )]
