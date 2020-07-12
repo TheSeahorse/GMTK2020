@@ -46,3 +46,21 @@ position = Vector2( 0, 8 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
 centered = false
+
+[node name="jump_dash" type="ColorRect" parent="."]
+margin_left = 24.0
+margin_top = 47.5621
+margin_right = 72.0
+margin_bottom = 79.5621
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="lazer_teleport" type="ColorRect" parent="."]
+margin_left = 101.424
+margin_top = 47.5621
+margin_right = 149.424
+margin_bottom = 79.5621
+__meta__ = {
+"_edit_use_anchors_": false
+}

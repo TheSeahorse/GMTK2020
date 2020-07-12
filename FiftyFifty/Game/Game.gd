@@ -30,7 +30,14 @@ func _process(_delta):
 		gun_energy += energy_since_shot
 	if gun_energy > 100:
 		gun_energy = 100
-
+	if jump_dash == 0:
+		$HUD/jump_dash.color = Color8(255, 243, 60, 255)
+	else:
+		$HUD/jump_dash.color = Color8(255, 2, 239, 255)
+	if lazer_teleport == 0:
+		$HUD/lazer_teleport.color = Color8(33, 255, 36, 255)
+	else:
+		$HUD/lazer_teleport.color = Color8(33, 42, 255, 255)
 func _physics_process(_delta):
 	if player.is_on_floor() and player.velocity.y > 0:
 		player_jumps = 2
