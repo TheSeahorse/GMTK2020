@@ -46,6 +46,7 @@ animations = [ {
 [node name="HUD" type="CanvasLayer"]
 
 [node name="HealthBar" type="ProgressBar" parent="."]
+visible = false
 margin_left = 26.0
 margin_top = 8.0
 margin_right = 172.0
@@ -59,6 +60,7 @@ __meta__ = {
 }
 
 [node name="GunBar" type="ProgressBar" parent="."]
+visible = false
 margin_left = 24.0
 margin_top = 30.0
 margin_right = 168.0
@@ -72,17 +74,20 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="."]
+visible = false
 position = Vector2( 0, 8 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
 centered = false
 
 [node name="JumpDashButton" type="AnimatedSprite" parent="."]
+visible = false
 position = Vector2( 48, 64 )
 frames = SubResource( 4 )
 animation = "dash"
 
 [node name="LazerTeleportButton" type="AnimatedSprite" parent="."]
+visible = false
 position = Vector2( 125, 64 )
 frames = SubResource( 5 )
 animation = "lazer"

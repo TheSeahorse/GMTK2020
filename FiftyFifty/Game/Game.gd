@@ -9,7 +9,7 @@ var player
 var level
 var player_jumps = 0
 var health = 100
-var levels = ["One", "Two"]
+var levels = ["One", "Two", "Three", "Four"]
 var current_level
 var jump_dash # 0 if jump is next, 1 if dash is next
 var lazer_teleport # 0 if lazer is next, 1 if tele is next
@@ -18,6 +18,12 @@ var gun_energy = 100
 var gun_shoot_start_time = OS.get_ticks_msec()
 
 var death_screen_visible = false
+
+
+# Progression variables
+var weapons_activated = false
+var thrusters_activated = false
+var hud_activated = false
 
 func _ready() -> void:
 	set_process_input(true)
@@ -57,7 +63,7 @@ func _physics_process(_delta):
 
 func _input(event):
 	if player:
-		if event.is_action_pressed("jump_dash"):
+		if thrusters_activated and event.is_action_pressed("jump_dash"):
 			if player_jumps > 0:
 				if jump_dash == 0:
 					player.jump()
@@ -66,7 +72,7 @@ func _input(event):
 				jump_dash = randi() % 2
 				player_jumps -= 1
 
-		if event.is_action_pressed("hook_shoot"):
+		if weapons_activated and event.is_action_pressed("hook_shoot"):
 			shoot()
 
 	if death_screen_visible:
@@ -95,6 +101,14 @@ func start_level(level_name: String):
 	player.connect("take_damage", self, "change_health")
 	add_child(level)
 	level.start_level(level_name)
+
+	if level_name == "Two":
+		weapons_activated = true
+		thrusters_activated = true
+
+	if level_name == "Three":
+		for child in $HUD.get_children():
+			child.show()
 
 func change_health(value: int):
 	print("inside change health: " + str(value))

@@ -1,0 +1,136 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://Game/World/Portal.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Game/Enemies/Evil_henchman.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game/World/base_tile.png" type="Texture" id=4]
+[ext_resource path="res://Game/Enemies/Enderman.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Fonts/FontTheme.tres" type="Theme" id=6]
+[ext_resource path="res://Game/Level/Levels/Three.gd" type="Script" id=7]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="TileSet" id=3]
+0/name = "icon.png 0"
+0/texture = ExtResource( 1 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 32, 32 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 1 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 1 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+1/name = "base_tile.png 1"
+1/texture = ExtResource( 4 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 0, 32, 32 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape = SubResource( 2 )
+1/shape_one_way = false
+1/shape_one_way_margin = 1.0
+1/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 2 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+1/z_index = 0
+
+[node name="Three" type="Node2D"]
+script = ExtResource( 7 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource( 3 )
+cell_size = Vector2( 32, 32 )
+collision_layer = 2
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( 524281, 1, 0, 589817, 1, 0, 655353, 1, 0, 589901, 1, 0, 589902, 1, 0, 589903, 1, 0, 589904, 1, 0, 589958, 1, 0, 720889, 1, 0, 655494, 1, 0, 786425, 1, 0, 721030, 1, 0, 851961, 1, 0, 786566, 1, 0, 917497, 1, 0, 852042, 1, 0, 852051, 1, 0, 852102, 1, 0, 983033, 1, 0, 917578, 1, 0, 917587, 1, 0, 917638, 1, 0, 1048569, 1, 0, 983099, 1, 0, 983100, 1, 0, 983101, 1, 0, 983102, 1, 0, 983103, 1, 0, 983104, 1, 0, 983105, 1, 0, 983106, 1, 0, 983107, 1, 0, 983108, 1, 0, 983109, 1, 0, 983110, 1, 0, 983111, 1, 0, 983112, 1, 0, 983113, 1, 0, 983114, 1, 0, 983115, 1, 0, 983116, 1, 0, 983117, 1, 0, 983118, 1, 0, 983119, 1, 0, 983120, 1, 0, 983121, 1, 0, 983122, 1, 0, 983123, 1, 0, 983124, 1, 0, 983125, 1, 0, 983126, 1, 0, 983127, 1, 0, 983128, 1, 0, 983169, 1, 0, 983170, 1, 0, 983171, 1, 0, 983172, 1, 0, 983173, 1, 0, 983174, 1, 0, 1114105, 1, 0, 1048641, 1, 0, 1048664, 1, 0, 1048705, 1, 0, 1179641, 1, 0, 1114177, 1, 0, 1114200, 1, 0, 1114241, 1, 0, 1245177, 1, 0, 1179689, 1, 0, 1179690, 1, 0, 1179691, 1, 0, 1179692, 1, 0, 1179693, 1, 0, 1179694, 1, 0, 1179695, 1, 0, 1179696, 1, 0, 1179697, 1, 0, 1179698, 1, 0, 1179699, 1, 0, 1179700, 1, 0, 1179701, 1, 0, 1179702, 1, 0, 1179703, 1, 0, 1179713, 1, 0, 1179736, 1, 0, 1179737, 1, 0, 1179738, 1, 0, 1179739, 1, 0, 1179740, 1, 0, 1179741, 1, 0, 1179742, 1, 0, 1179743, 1, 0, 1179744, 1, 0, 1179745, 1, 0, 1179759, 1, 0, 1179760, 1, 0, 1179761, 1, 0, 1179762, 1, 0, 1179763, 1, 0, 1179764, 1, 0, 1179765, 1, 0, 1179766, 1, 0, 1179767, 1, 0, 1179768, 1, 0, 1179769, 1, 0, 1179770, 1, 0, 1179771, 1, 0, 1179772, 1, 0, 1179773, 1, 0, 1179774, 1, 0, 1179775, 1, 0, 1179776, 1, 0, 1179777, 1, 0, 1310713, 1, 0, 1310714, 1, 0, 1310715, 1, 0, 1310716, 1, 0, 1310717, 1, 0, 1310718, 1, 0, 1310719, 1, 0, 1245184, 1, 0, 1245185, 1, 0, 1245186, 1, 0, 1245187, 1, 0, 1245188, 1, 0, 1245189, 1, 0, 1245190, 1, 0, 1245191, 1, 0, 1245192, 1, 0, 1245193, 1, 0, 1245211, 1, 0, 1245212, 1, 0, 1245213, 1, 0, 1245214, 1, 0, 1245215, 1, 0, 1245225, 1, 0, 1245239, 1, 0, 1245249, 1, 0, 1245272, 1, 0, 1245301, 1, 0, 1310729, 1, 0, 1310747, 1, 0, 1310751, 1, 0, 1310761, 1, 0, 1310775, 1, 0, 1310785, 1, 0, 1310808, 1, 0, 1310837, 1, 0, 1376265, 1, 0, 1376266, 1, 0, 1376267, 1, 0, 1376268, 1, 0, 1376269, 1, 0, 1376270, 1, 0, 1376271, 1, 0, 1376272, 1, 0, 1376273, 1, 0, 1376274, 1, 0, 1376275, 1, 0, 1376276, 1, 0, 1376277, 1, 0, 1376278, 1, 0, 1376279, 1, 0, 1376280, 1, 0, 1376281, 1, 0, 1376282, 1, 0, 1376283, 1, 0, 1376287, 1, 0, 1376288, 1, 0, 1376289, 1, 0, 1376290, 1, 0, 1376291, 1, 0, 1376292, 1, 0, 1376293, 1, 0, 1376294, 1, 0, 1376295, 1, 0, 1376296, 1, 0, 1376297, 1, 0, 1376311, 1, 0, 1376312, 1, 0, 1376313, 1, 0, 1376314, 1, 0, 1376315, 1, 0, 1376316, 1, 0, 1376317, 1, 0, 1376318, 1, 0, 1376319, 1, 0, 1376320, 1, 0, 1376321, 1, 0, 1376344, 1, 0, 1376373, 1, 0, 1441880, 1, 0, 1441891, 1, 0, 1441892, 1, 0, 1441893, 1, 0, 1441894, 1, 0, 1441895, 1, 0, 1441896, 1, 0, 1441897, 1, 0, 1441898, 1, 0, 1441899, 1, 0, 1441900, 1, 0, 1441901, 1, 0, 1441902, 1, 0, 1441903, 1, 0, 1441904, 1, 0, 1441905, 1, 0, 1441906, 1, 0, 1441907, 1, 0, 1441908, 1, 0, 1441909, 1, 0, 1507416, 1, 0, 1507427, 1, 0, 1572952, 1, 0, 1572963, 1, 0, 1638488, 1, 0, 1638489, 1, 0, 1638490, 1, 0, 1638491, 1, 0, 1638492, 1, 0, 1638493, 1, 0, 1638494, 1, 0, 1638495, 1, 0, 1638496, 1, 0, 1638497, 1, 0, 1638498, 1, 0, 1638499, 1, 0 )
+
+[node name="Portal" parent="." instance=ExtResource( 2 )]
+position = Vector2( 4215, 407 )
+scale = Vector2( 2.29715, 2.29715 )
+
+[node name="Evil_henchman6" parent="." instance=ExtResource( 3 )]
+position = Vector2( 3727, 688 )
+
+[node name="Evil_henchman5" parent="." instance=ExtResource( 3 )]
+position = Vector2( 2935, 784 )
+
+[node name="Evil_henchman" parent="." instance=ExtResource( 3 )]
+position = Vector2( 463, 651 )
+
+[node name="Evil_henchman2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1176, 656 )
+
+[node name="Evil_henchman3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1874, 656 )
+
+[node name="Evil_henchman4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 2427, 464 )
+
+[node name="Evil_henchman7" parent="." instance=ExtResource( 3 )]
+position = Vector2( 4050, 560 )
+direction = 0
+
+[node name="Enderman" parent="." instance=ExtResource( 5 )]
+position = Vector2( 721, 632 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -283.5
+margin_top = -210.5
+margin_right = 283.5
+margin_bottom = 210.5
+theme = ExtResource( 6 )
+text = "Initializing HUD...
+
+SUCCESS
+
+Thrusters and Weapons
+indicator running
+
+Press ENTER to acknowledge"
+align = 1
+valign = 1
