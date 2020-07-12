@@ -12,6 +12,8 @@ var health = 100
 var lazer
 var levels = ["One", "Two"]
 var current_level
+var jump_dash # 0 if jump is next, 1 if dash is next
+var lazer_teleport # 0 if lazer is next, 1 if tele is next
 
 var gun_energy = 100
 var gun_shoot_start_time = OS.get_ticks_msec()
@@ -43,10 +45,12 @@ func _physics_process(delta):
 func _input(event):
 	if event.is_action_pressed("jump_dash"):
 		if player_jumps > 0:
-			if randi() % 2 == 0:
+			if jump_dash == 0:
 				player.jump()
 			else:
 				player.dash()
+			jump_dash = randi() % 2
+			print("next_jump_dash: " + str(jump_dash))
 			player_jumps -= 1
 
 	if event.is_action_pressed("hook_shoot"):
@@ -57,6 +61,10 @@ func start_level(level_name: String):
 	health = 100
 	$HUD/HealthBar.value = 100
 	$HUD/GunBar.value = 100
+	jump_dash = randi() % 2
+	lazer_teleport = randi() % 2
+	print("jump_dash: " + str(jump_dash))
+	print("lazer_teleport: " + str(lazer_teleport))
 	player = Player.instance()
 	level = Level.instance()
 	add_child(player)
@@ -85,20 +93,7 @@ func shoot():
 
 	gun_shoot_start_time = OS.get_ticks_msec()
 
-	if randi() % 2 == 0:
-		player.play_prio_animation("teleport")
-		$teleport_sound_start.play()
-		var teleport = Teleport.instance()
-		var position_diff
-		if player.direction == player.Direction.RIGHT:
-			position_diff = Vector2(32, 32)
-		else:
-			position_diff = Vector2(-16, 32)
-		teleport.position = player.position + position_diff
-		add_child(teleport)
-		teleport.init(player.direction)
-		teleport.connect("hit", self, "on_Teleport_hit")
-	else:
+	if lazer_teleport == 0:
 		player.play_prio_animation("lazer")
 		$laser_sound.play()
 		lazer = Lazer.instance()
@@ -111,6 +106,21 @@ func shoot():
 			position_diff = Vector2(-16, 32)
 		lazer.position = player.position + position_diff
 		lazer.connect("hit", self, "on_Lazer_hit")
+	else:
+		player.play_prio_animation("teleport")
+		$teleport_sound_start.play()
+		var teleport = Teleport.instance()
+		var position_diff
+		if player.direction == player.Direction.RIGHT:
+			position_diff = Vector2(32, 32)
+		else:
+			position_diff = Vector2(-16, 32)
+		teleport.position = player.position + position_diff
+		add_child(teleport)
+		teleport.init(player.direction)
+		teleport.connect("hit", self, "on_Teleport_hit")
+	lazer_teleport = randi() % 2
+	print("next_lazer_teleport: " + str(lazer_teleport))
 
 func on_Teleport_hit(teleport, body):
 	$teleport_sound_end.play()
