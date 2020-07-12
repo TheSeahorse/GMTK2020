@@ -6,6 +6,7 @@
 [ext_resource path="res://Game/Player/teleport_sound_start.wav" type="AudioStream" id=4]
 [ext_resource path="res://Game/HUD.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Game/Player/death_sound.wav" type="AudioStream" id=6]
+[ext_resource path="res://Game/Player/DeathScreen.tscn" type="PackedScene" id=6]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -26,3 +27,7 @@ volume_db = -10.097
 
 [node name="death_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+
+[node name="DeathScreen" parent="." instance=ExtResource( 6 )]
+
+[node name="Camera2D" type="Camera2D" parent="."]
