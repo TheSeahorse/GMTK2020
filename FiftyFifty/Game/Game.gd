@@ -20,6 +20,8 @@ var gun_shoot_start_time = OS.get_ticks_msec()
 
 var death_screen_visible = false
 
+# Score
+var score = 0
 
 # Progression variables
 var weapons_activated = false
@@ -30,6 +32,8 @@ func _ready() -> void:
 	set_process_input(true)
 	set_process(true)
 	randomize()
+	for child in $HUD.get_children():
+		child.hide()
 	start_level("One")
 
 func _process(_delta):
@@ -47,6 +51,9 @@ func _process(_delta):
 		$HUD/LazerTeleportButton.play("lazer")
 	else:
 		$HUD/LazerTeleportButton.play("teleport")
+
+	$HUD/ScoreLabel.text = "Score: %s" % score
+
 func _physics_process(_delta):
 	if player:
 		if player.is_on_floor() and player.velocity.y > 0:
@@ -192,6 +199,10 @@ func on_Teleport_hit(teleport, _body):
 
 func on_Lazer_hit(lazer, body):
 	if body is Enemy or (body is Enderman):
+		if body is Enemy:
+			score += 100
+		if body is Enderman:
+			score += 200
 		body.queue_free()
 	if body is Crate:
 		call_deferred("create_coin", body.position)

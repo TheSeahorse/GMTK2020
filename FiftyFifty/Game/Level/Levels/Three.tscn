@@ -101,7 +101,6 @@ position = Vector2( 721, 632 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="CanvasLayer"]
-visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -114,21 +113,46 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="CanvasLayer/Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -283.5
-margin_top = -210.5
+margin_top = -158.5
 margin_right = 283.5
-margin_bottom = 210.5
+margin_bottom = 158.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer"]
+margin_right = 567.0
+margin_bottom = 50.0
 theme = ExtResource( 6 )
-text = "Initializing HUD...
+text = "Initializing HUD..."
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-SUCCESS
+[node name="SuccessLabel" type="Label" parent="CanvasLayer/Control/VBoxContainer"]
+margin_top = 54.0
+margin_right = 567.0
+margin_bottom = 104.0
+theme = ExtResource( 6 )
+custom_colors/font_color = Color( 0, 0.768627, 0.0660539, 1 )
+text = "SUCCESS"
+align = 1
+valign = 1
 
-Thrusters and Weapons
+[node name="Label3" type="Label" parent="CanvasLayer/Control/VBoxContainer"]
+margin_top = 108.0
+margin_right = 567.0
+margin_bottom = 317.0
+theme = ExtResource( 6 )
+text = "Thrusters and Weapons
 indicator running
 
 Press ENTER to acknowledge"

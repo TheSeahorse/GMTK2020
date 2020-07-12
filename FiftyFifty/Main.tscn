@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Game/World/Sunset_background.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Fonts/m5x7.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Game/World/savage_robot.wav" type="AudioStream" id=4]
+[ext_resource path="res://Fonts/FontTheme64.tres" type="Theme" id=5]
 
 [node name="Main" type="CenterContainer"]
 anchor_right = 1.0
@@ -16,10 +17,11 @@ __meta__ = {
 }
 
 [node name="StartGameButton" type="Label" parent="."]
-margin_left = 420.0
-margin_top = 335.0
-margin_right = 860.0
+margin_left = 410.0
+margin_top = 334.0
+margin_right = 870.0
 margin_bottom = 385.0
+theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 3 )
 text = "Press ENTER to START"
 

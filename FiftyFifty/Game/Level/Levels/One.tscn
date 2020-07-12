@@ -97,7 +97,7 @@ margin_top = 282.0
 margin_right = 885.0
 margin_bottom = 438.0
 theme = ExtResource( 3 )
-text = "Initializing system..
+text = "Initializing system...
 
 Use arrow keys to move"
 align = 1
