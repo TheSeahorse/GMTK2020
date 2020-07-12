@@ -82,7 +82,7 @@ func dash():
 	$Sprite.play("dash")
 	$Sprite.frame = 0
 	prio_anim = true
-	prio_anim_end = OS.get_ticks_msec() + 375
+	prio_anim_end = OS.get_ticks_msec() + 250
 	$dash_sound.play()
 	if direction == Direction.RIGHT:
 		dash_velocity.x = DASH_SPEED
@@ -113,20 +113,21 @@ func stop():
 	move_velocity.x = 0
 
 
-func hurt():
-	emit_signal("take_damage", -25)
-	prio_anim = true
-	prio_anim_end = OS.get_ticks_msec() + 1000
-	$Sprite.play("hurt")
-	$hurt_sound.play()
-	hurt_start = OS.get_ticks_msec()
-	is_knocked_back = true
-	is_hurting = true
-	velocity.y = HURT_SPEED.y
-	if direction == Direction.RIGHT:
-		move_velocity.x = -HURT_SPEED.x
-	else:
-		move_velocity.x = HURT_SPEED.x
+func hurt(damage: int):
+	if not is_hurting:
+		emit_signal("take_damage", damage)
+		prio_anim = true
+		prio_anim_end = OS.get_ticks_msec() + 1000
+		$Sprite.play("hurt")
+		$hurt_sound.play()
+		hurt_start = OS.get_ticks_msec()
+		is_knocked_back = true
+		is_hurting = true
+		velocity.y = HURT_SPEED.y
+		if direction == Direction.RIGHT:
+			move_velocity.x = -HURT_SPEED.x
+		else:
+			move_velocity.x = HURT_SPEED.x
 
 
 func play_prio_animation(name: String, msec: int):
@@ -138,6 +139,5 @@ func play_prio_animation(name: String, msec: int):
 func _on_Hurtbox_area_entered(area: Area2D) -> void:
 	if area is Portal:
 		emit_signal("level_cleared")
-	else:
-		if not is_hurting:
-			hurt()
+	elif area != EnemyLazer: # laser damage handled in the enemy that shoots the lazer
+		hurt(-25)

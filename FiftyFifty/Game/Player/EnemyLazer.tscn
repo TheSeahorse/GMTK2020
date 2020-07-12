@@ -4,7 +4,7 @@
 [ext_resource path="res://Game/Player/EnemyLazer.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 1 )
+extents = Vector2( 1, 0 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 9, 1 )

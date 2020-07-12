@@ -56,7 +56,6 @@ func _input(event):
 			else:
 				player.dash()
 			jump_dash = randi() % 2
-			print("next_jump_dash: " + str(jump_dash))
 			player_jumps -= 1
 
 	if event.is_action_pressed("hook_shoot"):
@@ -69,8 +68,6 @@ func start_level(level_name: String):
 	$HUD/GunBar.value = 100
 	jump_dash = randi() % 2
 	lazer_teleport = randi() % 2
-	print("jump_dash: " + str(jump_dash))
-	print("lazer_teleport: " + str(lazer_teleport))
 	player = Player.instance()
 	level = Level.instance()
 	add_child(player)
@@ -81,6 +78,7 @@ func start_level(level_name: String):
 	level.start_level(level_name)
 
 func change_health(value: int):
+	print("inside change health: " + str(value))
 	health += value
 	$HUD/HealthBar.value = health
 	if health > 100:
@@ -126,7 +124,6 @@ func shoot():
 		teleport.init(player.direction)
 		teleport.connect("hit", self, "on_Teleport_hit")
 	lazer_teleport = randi() % 2
-	print("next_lazer_teleport: " + str(lazer_teleport))
 
 func on_Teleport_hit(teleport, _body):
 	$teleport_sound_end.play()
@@ -157,6 +154,7 @@ func player_died():
 	level.queue_free()
 	player.queue_free()
 	start_level(current_level)
+	$death_sound.play()
 
 func level_cleared():
 	player.queue_free()

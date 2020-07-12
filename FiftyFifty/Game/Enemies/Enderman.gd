@@ -80,7 +80,7 @@ func shoot_lazer():
 
 func on_Lazer_hit(lazer, body):
 	if body is Player:
-		body.hurt()
+		body.hurt(-34)
 	lazer.queue_free()
 
 func jump():
