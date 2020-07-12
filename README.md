@@ -7,6 +7,7 @@ Portals made by RodHakGames - RHG - https://opengameart.org/content/portals-32-x
 Background - https://opengameart.org/content/city-background-repetitive-3  
 Health Bar - https://adwitr.itch.io/pixel-health-bar-asset-pack  
 Coins - https://opengameart.org/content/oga-medal-bases-png  
+Crate - https://opengameart.org/content/small-crate  
 
 Sound:  
 Greek - Savage Robot - https://www.youtube.com/c/FlavioConcini  
