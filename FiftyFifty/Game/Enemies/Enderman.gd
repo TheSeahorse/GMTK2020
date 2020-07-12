@@ -74,7 +74,7 @@ func shoot_lazer():
 		lazer.position.x = -32
 	else:
 		lazer.position.x = 16
-	lazer.position.y = -4
+	lazer.position.y = -10
 	lazer.init(direction)
 	lazer.connect("hit", self, "on_Lazer_hit")
 

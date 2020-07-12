@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=2]
+[gd_scene load_steps=86 format=2]
 
 [ext_resource path="res://Game/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Game/Player/Robot_hurt.png" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Game/Player/Robot_portal.png" type="Texture" id=10]
 [ext_resource path="res://Game/Player/Robot_dash.png" type="Texture" id=11]
 [ext_resource path="res://Game/Player/Robot_death.png" type="Texture" id=12]
+[ext_resource path="res://Game/Player/death_sound2.wav" type="AudioStream" id=13]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 7 )
@@ -377,4 +378,8 @@ volume_db = -11.107
 [node name="hurt_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 volume_db = -10.097
+
+[node name="death_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+volume_db = -3.029
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]

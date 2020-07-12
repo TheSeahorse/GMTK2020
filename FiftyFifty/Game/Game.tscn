@@ -24,8 +24,6 @@ volume_db = -10.097
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
 
-[node name="death_sound" type="AudioStreamPlayer" parent="."]
-
 [node name="DeathScreen" parent="." instance=ExtResource( 6 )]
 
 [node name="Camera2D" type="Camera2D" parent="."]

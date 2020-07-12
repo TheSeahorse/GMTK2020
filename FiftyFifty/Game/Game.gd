@@ -111,7 +111,6 @@ func start_level(level_name: String):
 			child.show()
 
 func change_health(value: int):
-	print("inside change health: " + str(value))
 	health += value
 	$HUD/HealthBar.value = health
 	if health > 100:
@@ -200,8 +199,7 @@ func player_died():
 	$Camera2D.offset = player.get_node("Camera2D").offset
 	player.get_node("Camera2D").current = false
 	$Camera2D.make_current()
-	player.queue_free()
-	$death_sound.play()
+	player.die()
 	$DeathScreen/Control.show()
 	death_screen_visible = true
 

@@ -31,9 +31,13 @@ var prio_anim_end = OS.get_ticks_msec()
 var is_dashing = false
 var is_knocked_back = false #knock back anim after taking damage
 var is_hurting = false #blinking hurt animation, should not take damage during this
-
+var dead = false
+var death_start
 
 func _process(_delta: float) -> void:
+	if dead:
+		if death_start + 1000 < OS.get_ticks_msec():
+			self.queue_free()
 	if is_hurting:
 		if hurt_start + 1000 < OS.get_ticks_msec():
 			is_hurting = false
@@ -42,6 +46,8 @@ func _process(_delta: float) -> void:
 			prio_anim = false
 
 func _physics_process(delta):
+	if dead:
+		return
 	if is_on_ceiling():
 		velocity.y = 0
 	if not(is_on_floor()):
@@ -64,7 +70,7 @@ func _physics_process(delta):
 	move_and_slide(velocity, Vector2.UP)
 
 func jump():
-	if is_knocked_back:
+	if is_knocked_back or dead:
 		#cant jump while hurting
 		return
 	$Sprite.play("jump")
@@ -75,7 +81,7 @@ func jump():
 	velocity.y = JUMP_SPEED
 
 func dash():
-	if is_knocked_back:
+	if is_knocked_back or dead:
 		#cant dash while hurting
 		return
 	is_dashing = true
@@ -91,7 +97,7 @@ func dash():
 	dash_start = OS.get_ticks_msec()
 
 func move(move_direction):
-	if is_dashing or is_knocked_back:
+	if is_dashing or is_knocked_back or dead:
 		# Don't change direction while dashing or hurting
 		return
 	if not prio_anim:
@@ -106,7 +112,7 @@ func move(move_direction):
 		$Sprite.flip_h = false
 
 func stop():
-	if is_knocked_back:
+	if is_knocked_back or dead:
 		return
 	if not prio_anim:
 		$Sprite.play("idle")
@@ -118,8 +124,9 @@ func hurt(damage: int):
 		emit_signal("take_damage", damage)
 		prio_anim = true
 		prio_anim_end = OS.get_ticks_msec() + 1000
-		$Sprite.play("hurt")
-		$hurt_sound.play()
+		if not dead:
+			$Sprite.play("hurt")
+			$hurt_sound.play()
 		hurt_start = OS.get_ticks_msec()
 		is_knocked_back = true
 		is_hurting = true
@@ -131,6 +138,8 @@ func hurt(damage: int):
 
 
 func play_prio_animation(name: String, msec: int):
+	if dead:
+		return
 	$Sprite.play(name)
 	$Sprite.frame = 0
 	prio_anim = true
@@ -141,3 +150,14 @@ func _on_Hurtbox_area_entered(area: Area2D) -> void:
 		emit_signal("level_cleared")
 	elif area != EnemyLazer: # laser damage handled in the enemy that shoots the lazer
 		hurt(-25)
+
+func die():
+	$death_sound.play()
+	dead = true
+	death_start = OS.get_ticks_msec()
+	$CollisionShape2D.disabled = true
+	$Hurtbox/CollisionShape2D.disabled = true
+	print("before death anim")
+	$Sprite.play("death")
+	$Sprite.frame = 0
+
