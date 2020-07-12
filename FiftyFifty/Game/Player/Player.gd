@@ -44,6 +44,8 @@ func _process(_delta: float) -> void:
 			$Sprite.play("idle")
 
 func _physics_process(delta):
+	if is_on_ceiling():
+		velocity.y = 0
 	if not(is_on_floor()):
 		velocity.y += GRAVITY * delta
 	if is_on_floor() and velocity.y > 0:
