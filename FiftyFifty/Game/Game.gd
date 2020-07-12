@@ -112,6 +112,7 @@ func start_level(level_name: String):
 	level.start_level(level_name)
 
 	if level_name == "Two":
+		$HUD/ScoreLabel.show()
 		weapons_activated = true
 		thrusters_activated = true
 
