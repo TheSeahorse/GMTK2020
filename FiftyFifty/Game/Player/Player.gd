@@ -4,6 +4,7 @@ class_name Player
 
 signal level_cleared
 signal take_damage
+signal coin_pickup(value)
 
 enum Direction {
 	RIGHT,
@@ -148,8 +149,12 @@ func play_prio_animation(name: String, msec: int):
 func _on_Hurtbox_area_entered(area: Area2D) -> void:
 	if area is Portal:
 		emit_signal("level_cleared")
-	elif (area != EnemyLazer) and (area.collision_layer != 8): # laser damage handled in the enemy that shoots the lazer
+	elif area.collision_layer == 8:
+		$coin_pickup.play()
+		emit_signal("coin_pickup", area.value)
+	elif (area != EnemyLazer): # laser damage handled in the enemy that shoots the lazer
 		hurt(-25)
+
 
 func die():
 	$death_sound.play()

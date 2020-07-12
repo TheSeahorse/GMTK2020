@@ -7,7 +7,7 @@ var pickup = false
 
 func _process(delta: float) -> void:
 	if pickup:
-		if pickup_time + 250 < OS.get_ticks_msec():
+		if pickup_time + 10 < OS.get_ticks_msec():
 			self.queue_free()
 
 
@@ -18,8 +18,6 @@ func change_value(new_value: String):
 
 func _on_Coin_area_entered(area: Area2D) -> void:
 	if area.get_parent().collision_layer == 1:
-		print("inner side")
 		pickup_time = OS.get_ticks_msec()
 		pickup = true
-		$coin_pickup.play()
 		$AnimatedSprite.play("none")

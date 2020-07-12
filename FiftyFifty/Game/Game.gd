@@ -106,6 +106,7 @@ func start_level(level_name: String):
 	player.position.y = 540
 	player.connect("level_cleared", self, "level_cleared")
 	player.connect("take_damage", self, "change_health")
+	player.connect("coin_pickup", self, "coin_pickup")
 	add_child(level)
 	level.start_level(level_name)
 
@@ -214,12 +215,20 @@ func create_coin(position: Vector2):
 	coin.position.x = position.x
 	coin.position.y = position.y + 8
 	var rand = randi() % 10
-	if rand > 2:
+	if rand < 2:
 		coin.change_value("gold")
-	elif rand > 5:
+	elif rand < 5:
 		coin.change_value("silver")
 	else:
 		coin.change_value("bronze")
+
+func coin_pickup(value: String):
+	if value == "bronze":
+		Global.score += 100
+	if value == "silver":
+		Global.score += 250
+	if value == "gold":
+		Global.score += 500
 
 func player_died():
 	$Camera2D.position = player.get_node("Camera2D").get_camera_position()
@@ -227,6 +236,7 @@ func player_died():
 	player.get_node("Camera2D").current = false
 	$Camera2D.make_current()
 	player.die()
+	Global.score /= 2
 	$DeathScreen/Control.show()
 	death_screen_visible = true
 
