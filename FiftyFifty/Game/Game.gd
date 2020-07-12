@@ -6,6 +6,8 @@ onready var Teleport = preload("res://Game/Player/Teleport.tscn")
 onready var Level = preload("res://Game/Level/Level.tscn")
 onready var Coin = preload("res://Game/World/Coin.tscn")
 
+onready var Global = get_node("/root/Global")
+
 var player
 var level
 var player_jumps = 0
@@ -19,9 +21,6 @@ var gun_energy = 100
 var gun_shoot_start_time = OS.get_ticks_msec()
 
 var death_screen_visible = false
-
-# Score
-var score = 0
 
 # Progression variables
 var weapons_activated = false
@@ -52,7 +51,7 @@ func _process(_delta):
 	else:
 		$HUD/LazerTeleportButton.play("teleport")
 
-	$HUD/ScoreLabel.text = "Score: %s" % score
+	$HUD/ScoreLabel.text = "Score: %s" % Global.score
 
 func _physics_process(_delta):
 	if player:
@@ -200,9 +199,9 @@ func on_Teleport_hit(teleport, _body):
 func on_Lazer_hit(lazer, body):
 	if body is Enemy or (body is Enderman):
 		if body is Enemy:
-			score += 100
+			Global.score += 100
 		if body is Enderman:
-			score += 200
+			Global.score += 200
 		body.queue_free()
 	if body is Crate:
 		call_deferred("create_coin", body.position)

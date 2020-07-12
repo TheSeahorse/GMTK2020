@@ -1,8 +1,10 @@
 extends Control
 
-func _on_Button_pressed() -> void:
-	get_tree().change_scene("res://Main.tscn")
+onready var Global = get_node("/root/Global")
+
+func _ready():
+	$CenterContainer/VBoxContainer/ScoreLabel.text = "Score: " + str(Global.score)
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("jump_dash") or event.is_action_pressed("ui_select"):
-		_on_Button_pressed()
+	if event.is_action_pressed("enter"):
+		get_tree().change_scene("res://Main.tscn")
