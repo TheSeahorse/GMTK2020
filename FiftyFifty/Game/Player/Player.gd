@@ -154,10 +154,11 @@ func _on_Hurtbox_area_entered(area: Area2D) -> void:
 
 
 func die():
-	$death_sound.play()
-	dead = true
-	death_start = OS.get_ticks_msec()
-	$CollisionShape2D.call_deferred("disabled", true)
-	$Hurtbox/CollisionShape2D.call_deferred("disabled", true)
-	$Sprite.play("death")
-	$Sprite.frame = 0
+	if not dead:
+		$death_sound.play()
+		dead = true
+		death_start = OS.get_ticks_msec()
+		$CollisionShape2D.call_deferred("disabled", true)
+		$Hurtbox/CollisionShape2D.call_deferred("disabled", true)
+		$Sprite.play("death")
+		$Sprite.frame = 0
