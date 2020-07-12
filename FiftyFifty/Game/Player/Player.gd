@@ -27,7 +27,7 @@ var dash_start = OS.get_ticks_msec()
 var dash_end = OS.get_ticks_msec()
 var hurt_start
 var prio_anim = false
-var prio_anim_start = OS.get_ticks_msec()
+var prio_anim_end = OS.get_ticks_msec()
 var is_dashing = false
 var is_knocked_back = false #knock back anim after taking damage
 var is_hurting = false #blinking hurt animation, should not take damage during this
@@ -37,11 +37,9 @@ func _process(_delta: float) -> void:
 	if is_hurting:
 		if hurt_start + 1000 < OS.get_ticks_msec():
 			is_hurting = false
-			$Sprite.play("idle")
 	if prio_anim:
-		if prio_anim_start + 250 < OS.get_ticks_msec():
+		if prio_anim_end < OS.get_ticks_msec(): # lägg till hur länge där animationen sker
 			prio_anim = false
-			$Sprite.play("idle")
 
 func _physics_process(delta):
 	if is_on_ceiling():
@@ -69,6 +67,10 @@ func jump():
 	if is_knocked_back:
 		#cant jump while hurting
 		return
+	$Sprite.play("jump")
+	$Sprite.frame = 0
+	prio_anim = true
+	prio_anim_end = OS.get_ticks_msec() + 500
 	$jump_sound.play()
 	velocity.y = JUMP_SPEED
 
@@ -77,6 +79,10 @@ func dash():
 		#cant dash while hurting
 		return
 	is_dashing = true
+	$Sprite.play("dash")
+	$Sprite.frame = 0
+	prio_anim = true
+	prio_anim_end = OS.get_ticks_msec() + 375
 	$dash_sound.play()
 	if direction == Direction.RIGHT:
 		dash_velocity.x = DASH_SPEED
@@ -110,7 +116,7 @@ func stop():
 func hurt():
 	emit_signal("take_damage", -25)
 	prio_anim = true
-	prio_anim_start = OS.get_ticks_msec() + 750
+	prio_anim_end = OS.get_ticks_msec() + 1000
 	$Sprite.play("hurt")
 	$hurt_sound.play()
 	hurt_start = OS.get_ticks_msec()
@@ -123,10 +129,11 @@ func hurt():
 		move_velocity.x = HURT_SPEED.x
 
 
-func play_prio_animation(name: String):
+func play_prio_animation(name: String, msec: int):
 	$Sprite.play(name)
+	$Sprite.frame = 0
 	prio_anim = true
-	prio_anim_start = OS.get_ticks_msec()
+	prio_anim_end = OS.get_ticks_msec() + 250
 
 func _on_Hurtbox_area_entered(area: Area2D) -> void:
 	if area is Portal:

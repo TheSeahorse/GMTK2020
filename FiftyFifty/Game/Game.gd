@@ -100,7 +100,7 @@ func shoot():
 	gun_shoot_start_time = OS.get_ticks_msec()
 
 	if lazer_teleport == 0:
-		player.play_prio_animation("lazer")
+		player.play_prio_animation("lazer", 250)
 		$laser_sound.play()
 		var lazer = Lazer.instance()
 		add_child(lazer)
@@ -113,7 +113,7 @@ func shoot():
 		lazer.position = player.position + position_diff
 		lazer.connect("hit", self, "on_Lazer_hit")
 	else:
-		player.play_prio_animation("teleport")
+		player.play_prio_animation("teleport", 250)
 		$teleport_sound_start.play()
 		var teleport = Teleport.instance()
 		var position_diff
