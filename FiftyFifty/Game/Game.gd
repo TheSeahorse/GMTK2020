@@ -51,6 +51,10 @@ func _physics_process(_delta):
 		if not(Input.is_action_pressed("move_left")) and not(Input.is_action_pressed("move_right")):
 			player.stop()
 
+		if player.position.y > 2000:
+			player_died()
+
+
 func _input(event):
 	if player:
 		if event.is_action_pressed("jump_dash"):
