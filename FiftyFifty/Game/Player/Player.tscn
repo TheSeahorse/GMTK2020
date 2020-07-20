@@ -437,7 +437,7 @@ animation = "none"
 playing = true
 
 [node name="ThrusterOverlay" type="AnimatedSprite" parent="Sprite"]
-position = Vector2( 22, 38 )
+position = Vector2( 16, 16 )
 frames = SubResource( 78 )
 animation = "none"
 

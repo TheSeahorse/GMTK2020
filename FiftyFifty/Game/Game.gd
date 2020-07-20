@@ -15,7 +15,9 @@ var health = 100
 var levels = ["One", "Two", "Three", "Four", "Five", "Six"]
 var current_level
 var jump_dash # 0 if jump is next, 1 if dash is next
+var jd_grace = 0 # how many times the same jump/dash was gotten in a row
 var lazer_teleport # 0 if lazer is next, 1 if tele is next
+var lt_grace = 0 # how many times the same lazer/teleport was gotten in a row
 
 var gun_energy = 100
 var gun_shoot_start_time = OS.get_ticks_msec()
@@ -43,13 +45,14 @@ func _process(_delta):
 		gun_energy += energy_since_shot
 	if gun_energy > 100:
 		gun_energy = 100
-	if current_level != "One":
+	if thrusters_activated:
 		if jump_dash == 0:
 			$HUD/JumpDashButton.play("jump")
 			player.play_animation("Sprite/ThrusterOverlay", "jump")
 		else:
 			$HUD/JumpDashButton.play("dash")
 			player.play_animation("Sprite/ThrusterOverlay", "dash")
+	if weapons_activated:
 		if lazer_teleport == 0:
 			$HUD/LazerTeleportButton.play("lazer")
 			player.play_animation("Sprite/GunOverlay", "lazer")
@@ -77,15 +80,17 @@ func _physics_process(_delta):
 func _input(event):
 	if player:
 		if thrusters_activated and event.is_action_pressed("jump_dash"):
+			print("jd_grace: " + str(jd_grace))
 			if player_jumps > 0:
 				if jump_dash == 0:
 					player.jump()
 				else:
 					player.dash()
-				jump_dash = randi() % 2
+				new_fifty_fifty_action("jump_dash")
 				player_jumps -= 1
 
-		if weapons_activated and event.is_action_pressed("hook_shoot"):
+		if weapons_activated and event.is_action_pressed("lazer_teleport"):
+			print("lt_grace: " + str(lt_grace))
 			shoot()
 
 	if death_screen_visible:
@@ -105,7 +110,9 @@ func start_level(level_name: String):
 	$HUD/HealthBar.value = 100
 	$HUD/GunBar.value = 100
 	jump_dash = randi() % 2
+	jd_grace = 1
 	lazer_teleport = randi() % 2
+	lt_grace = 1
 	player = Player.instance()
 	level = Level.instance()
 	add_child(player)
@@ -170,7 +177,40 @@ func shoot():
 		add_child(teleport)
 		teleport.init(player.direction)
 		teleport.connect("hit", self, "on_Teleport_hit")
-	lazer_teleport = randi() % 2
+	new_fifty_fifty_action("lazer_teleport")
+
+
+func new_fifty_fifty_action(action_name: String):
+	var rand = randi() % 2
+	if action_name == "jump_dash":
+		if rand == jump_dash:
+			if jd_grace > 3:
+				if jump_dash == 1:
+					jump_dash = 0
+					jd_grace = 1
+				else:
+					jump_dash = 1
+					jd_grace = 1
+			else:
+				jd_grace += 1
+		else:
+			jump_dash = rand
+			jd_grace = 1
+	elif action_name == "lazer_teleport":
+		if rand == lazer_teleport:
+			if lt_grace > 3:
+				if lazer_teleport == 1:
+					lazer_teleport = 0
+					lt_grace = 1
+				else:
+					lazer_teleport = 1
+					lt_grace = 1
+			else:
+				lt_grace += 1
+		else:
+			lazer_teleport = rand
+			lt_grace = 1
+
 
 func on_Teleport_hit(teleport, _body):
 	if not is_instance_valid(player):

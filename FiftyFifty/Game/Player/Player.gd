@@ -142,11 +142,11 @@ func hurt(damage: int):
 			move_velocity.x = HURT_SPEED.x
 
 
-func play_animation(nodeName: String, animName: String):
+func play_animation(node_name: String, anim_name: String):
 	if dead:
 		return
-	get_node(nodeName).play(animName)
-	get_node(nodeName).frame = 0
+	get_node(node_name).play(anim_name)
+	get_node(node_name).frame = 0
 
 
 func play_prio_animation(name: String, msec: int):

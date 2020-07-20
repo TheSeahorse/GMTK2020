@@ -13,6 +13,6 @@ func _input(event):
 		$CanvasLayer/ThrusterTips.hide()
 		$CanvasLayer/WeaponTips.show()
 		thruster_tips_shown = true
-	if not weapons_tips_shown and event.is_action_pressed("hook_shoot"):
+	if not weapons_tips_shown and event.is_action_pressed("lazer_teleport"):
 		$CanvasLayer/WeaponTips.hide()
 		weapons_tips_shown = true
