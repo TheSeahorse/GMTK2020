@@ -35,7 +35,14 @@ var is_hurting = false #blinking hurt animation, should not take damage during t
 var dead = false
 var death_start
 
+
 func _process(_delta: float) -> void:
+	if $Sprite.flip_h:
+		$Sprite/GunOverlay.flip_h = true
+		$Sprite/ThrusterOverlay.flip_h = true
+	else:
+		$Sprite/GunOverlay.flip_h = false
+		$Sprite/ThrusterOverlay.flip_h = false
 	if is_hurting:
 		if hurt_start + 1000 < OS.get_ticks_msec():
 			is_hurting = false
@@ -133,6 +140,13 @@ func hurt(damage: int):
 			move_velocity.x = -HURT_SPEED.x
 		else:
 			move_velocity.x = HURT_SPEED.x
+
+
+func play_animation(nodeName: String, animName: String):
+	if dead:
+		return
+	get_node(nodeName).play(animName)
+	get_node(nodeName).frame = 0
 
 
 func play_prio_animation(name: String, msec: int):

@@ -45,12 +45,16 @@ func _process(_delta):
 		gun_energy = 100
 	if jump_dash == 0:
 		$HUD/JumpDashButton.play("jump")
+		player.play_animation("Sprite/ThrusterOverlay", "jump")
 	else:
 		$HUD/JumpDashButton.play("dash")
+		player.play_animation("Sprite/ThrusterOverlay", "dash")
 	if lazer_teleport == 0:
 		$HUD/LazerTeleportButton.play("lazer")
+		player.play_animation("Sprite/GunOverlay", "lazer")
 	else:
 		$HUD/LazerTeleportButton.play("teleport")
+		player.play_animation("Sprite/GunOverlay", "teleport")
 
 	$HUD/ScoreLabel.text = "Score: %s" % Global.score
 
