@@ -80,7 +80,6 @@ func _physics_process(_delta):
 func _input(event):
 	if player:
 		if thrusters_activated and event.is_action_pressed("jump_dash"):
-			print("jd_grace: " + str(jd_grace))
 			if player_jumps > 0:
 				if jump_dash == 0:
 					player.jump()
@@ -90,7 +89,6 @@ func _input(event):
 				player_jumps -= 1
 
 		if weapons_activated and event.is_action_pressed("lazer_teleport"):
-			print("lt_grace: " + str(lt_grace))
 			shoot()
 
 	if death_screen_visible:
